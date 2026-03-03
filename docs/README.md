@@ -1,6 +1,6 @@
 # Computational Immunology Bootcamp
 
-**A self-guided, 5-week introduction to computational modeling in translational immunology.**
+**A 5-week hands-on introduction to computational modeling in translational immunology.**
 
 No prior biology or programming experience required. By the end, you will be able to analyze real immune cell data from thousands of patients and build machine learning models that predict how immune cells recognize diseases.
 
@@ -67,18 +67,22 @@ Weekends are for rest or catching up.
 
 ---
 
-## Getting Help Without a Mentor
+## When You Get Stuck
 
-!!! info "This bootcamp is designed so you can complete it independently."
+Getting stuck is a normal part of learning -- it happens to every scientist and programmer. This bootcamp is designed to help you solve most problems on your own, because **debugging is itself a valuable skill**. Try these steps first:
 
-    Here is what to do when stuck:
+!!! info "Self-check steps (try these before reaching out)"
 
     1. **Re-read the instructions** -- Sometimes you missed a small detail
-    2. **Check the Troubleshooting Guide** -- Your error is probably listed there
+    2. **Check the [Troubleshooting Guide](TROUBLESHOOTING.md)** -- Your error is probably listed there
     3. **Google the exact error message** -- Put it in quotes for precise results
     4. **Ask an AI assistant** -- Paste your code and error into ChatGPT or Claude
     5. **Search Bioinformatics forums** -- [Biostars](https://www.biostars.org/) and [Stack Overflow](https://stackoverflow.com/) have answers to most questions
     6. **Take a break** -- Sometimes the answer comes after stepping away
+
+!!! tip "Still stuck after trying the above? That's totally okay."
+
+    You are always welcome to reach out with questions. Just include what you tried so far -- this helps us help you faster, and you will often find the answer yourself while writing it up.
 
 ---
 

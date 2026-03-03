@@ -1,12 +1,13 @@
 # Troubleshooting Guide
 
-This guide covers the most common errors you will encounter during the bootcamp. Before contacting anyone, work through this checklist:
+This guide covers the most common errors you will encounter during the bootcamp. Learning to troubleshoot on your own is one of the most valuable skills you will develop -- every programmer does this daily. Try these steps first, and if you are still stuck after working through them, you are always welcome to ask for help.
 
 1. **Read the error message carefully.** The last few lines usually contain the actual problem.
 2. **Check this guide** for your specific error.
 3. **Google the exact error message** in quotes (e.g., `"ModuleNotFoundError: No module named 'scanpy'"`)
 4. **Ask an AI assistant** (ChatGPT or Claude) -- paste your code and the full error message.
 5. **Search [Biostars](https://www.biostars.org/) or [Stack Overflow](https://stackoverflow.com/).**
+6. **Still stuck?** Reach out with your question -- just describe what you tried so we can pick up where you left off.
 
 ---
 
@@ -440,4 +441,4 @@ Colab is free and gives you a more powerful computer in the cloud. The downside 
 
 ---
 
-*Still stuck? That is normal and happens to every programmer. Take a break, come back with fresh eyes, and try again. The solution is almost always simpler than you think.*
+*Still stuck after trying the steps above? That is completely normal and happens to every programmer. Take a break, come back with fresh eyes, and try again -- the solution is almost always simpler than you think. And if you have genuinely exhausted these options, don't hesitate to reach out. Just let us know what you tried so we can help you efficiently.*
