@@ -1,0 +1,2702 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A self-guided introduction to computational modeling in translational immunology">
+      
+      
+        <meta name="author" content="Zicheng Wang">
+      
+      
+      
+        <link rel="prev" href="../week_0_setup/">
+      
+      
+        <link rel="next" href="../week_2_single_cell_pipeline/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Week 1 - Immunology Foundations - Computational Immunology Bootcamp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#week-1-immunology-foundations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-header__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computational Immunology Bootcamp
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Week 1 - Immunology Foundations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-nav__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computational Immunology Bootcamp
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_0_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 0 - Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 - Immunology Foundations
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 - Immunology Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-the-immune-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What Is the Immune System?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. What Is the Immune System?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-city-defense-analogy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The City Defense Analogy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#innate-vs-adaptive-immunity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Innate vs. Adaptive Immunity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-immune-cell-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Immune Cell Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-t-cells-and-b-cells-the-stars-of-adaptive-immunity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. T Cells and B Cells: The Stars of Adaptive Immunity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. T Cells and B Cells: The Stars of Adaptive Immunity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t-cells-born-in-the-thymus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T Cells: Born in the Thymus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-cells-born-in-the-bone-marrow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B Cells: Born in the Bone Marrow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcr-and-bcr-unique-receptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCR and BCR: Unique Receptors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vdj-recombination-shuffling-the-deck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VDJ Recombination: Shuffling the Deck
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-antigen-presentation-how-the-immune-system-shares-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Antigen Presentation: How the Immune System Shares Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Antigen Presentation: How the Immune System Shares Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mhc-class-i-showing-your-id-badge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MHC Class I: Showing Your ID Badge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mhc-class-ii-briefing-the-commanders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MHC Class II: Briefing the Commanders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-diagram-text-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Diagram (Text Version)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-what-is-gene-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. What Is Gene Expression?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. What Is Gene Expression?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dna-rna-protein-the-central-dogma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNA -&gt; RNA -&gt; Protein: The Central Dogma
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-gene-expression-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Gene Expression Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#this-is-what-single-cell-rna-seq-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Is What Single-Cell RNA-seq Measures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-is-single-cell-rna-seq-conceptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What Is Single-Cell RNA-seq? (Conceptual)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. What Is Single-Cell RNA-seq? (Conceptual)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-old-way-bulk-rna-seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Old Way: Bulk RNA-seq
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-new-way-single-cell-rna-seq-scrna-seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The New Way: Single-Cell RNA-seq (scRNA-seq)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-10x-genomics-works-simplified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How 10x Genomics Works (Simplified)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-data-a-cells-by-genes-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Data: A Cells-by-Genes Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-your-first-python-notebook-exploring-immune-cell-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Your First Python Notebook: Exploring Immune Cell Data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Your First Python Notebook: Exploring Immune Cell Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-activate-your-environment-and-launch-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Activate Your Environment and Launch Jupyter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-install-scanpy-if-not-already-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Install scanpy (if not already installed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-import-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Import Libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-load-the-pbmc-3k-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Load the PBMC 3k Dataset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-explore-the-data-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Explore the Data Shape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-look-at-gene-names-and-cell-barcodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Look at Gene Names and Cell Barcodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-peek-at-the-data-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Peek at the Data Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-hands-on-simple-data-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Hands-On: Simple Data Exploration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Hands-On: Simple Data Exploration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-how-many-genes-does-each-cell-express" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: How Many Genes Does Each Cell Express?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-visualize-with-a-histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Visualize with a Histogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-check-a-specific-gene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Check a Specific Gene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-compare-two-marker-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Compare Two Marker Genes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-challenge-reading-a-scientific-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. [CHALLENGE] Reading a Scientific Paper
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. [CHALLENGE] Reading a Scientific Paper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-a-paper-the-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read a Paper (The Secret)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-challenge-read-the-drop-seq-abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Challenge: Read the Drop-seq Abstract
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-key-vocabulary-this-week" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Key Vocabulary This Week
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-self-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Self-Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Self-Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepts-you-should-be-able-to-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts You Should Be Able to Explain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coding-skills-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coding Skills Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-whats-coming-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. What's Coming Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-papers-optional-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Papers (Optional Reading)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_2_single_cell_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 - Single-Cell RNA-seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_3_tcr_bcr_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3 - TCR & BCR Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_4_multi_omics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4 - Multi-omics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../final_practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TROUBLESHOOTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-the-immune-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What Is the Immune System?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. What Is the Immune System?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-city-defense-analogy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The City Defense Analogy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#innate-vs-adaptive-immunity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Innate vs. Adaptive Immunity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-immune-cell-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Immune Cell Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-t-cells-and-b-cells-the-stars-of-adaptive-immunity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. T Cells and B Cells: The Stars of Adaptive Immunity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. T Cells and B Cells: The Stars of Adaptive Immunity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t-cells-born-in-the-thymus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T Cells: Born in the Thymus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-cells-born-in-the-bone-marrow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B Cells: Born in the Bone Marrow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcr-and-bcr-unique-receptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCR and BCR: Unique Receptors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vdj-recombination-shuffling-the-deck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VDJ Recombination: Shuffling the Deck
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-antigen-presentation-how-the-immune-system-shares-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Antigen Presentation: How the Immune System Shares Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Antigen Presentation: How the Immune System Shares Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mhc-class-i-showing-your-id-badge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MHC Class I: Showing Your ID Badge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mhc-class-ii-briefing-the-commanders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MHC Class II: Briefing the Commanders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-diagram-text-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Diagram (Text Version)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-what-is-gene-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. What Is Gene Expression?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. What Is Gene Expression?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dna-rna-protein-the-central-dogma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNA -&gt; RNA -&gt; Protein: The Central Dogma
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-gene-expression-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Gene Expression Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#this-is-what-single-cell-rna-seq-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Is What Single-Cell RNA-seq Measures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-is-single-cell-rna-seq-conceptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What Is Single-Cell RNA-seq? (Conceptual)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. What Is Single-Cell RNA-seq? (Conceptual)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-old-way-bulk-rna-seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Old Way: Bulk RNA-seq
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-new-way-single-cell-rna-seq-scrna-seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The New Way: Single-Cell RNA-seq (scRNA-seq)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-10x-genomics-works-simplified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How 10x Genomics Works (Simplified)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-data-a-cells-by-genes-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Data: A Cells-by-Genes Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-your-first-python-notebook-exploring-immune-cell-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Your First Python Notebook: Exploring Immune Cell Data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Your First Python Notebook: Exploring Immune Cell Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-activate-your-environment-and-launch-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Activate Your Environment and Launch Jupyter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-install-scanpy-if-not-already-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Install scanpy (if not already installed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-import-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Import Libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-load-the-pbmc-3k-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Load the PBMC 3k Dataset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-explore-the-data-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Explore the Data Shape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-look-at-gene-names-and-cell-barcodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Look at Gene Names and Cell Barcodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-peek-at-the-data-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Peek at the Data Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-hands-on-simple-data-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Hands-On: Simple Data Exploration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Hands-On: Simple Data Exploration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-how-many-genes-does-each-cell-express" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: How Many Genes Does Each Cell Express?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-visualize-with-a-histogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Visualize with a Histogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-check-a-specific-gene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Check a Specific Gene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-compare-two-marker-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Compare Two Marker Genes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-challenge-reading-a-scientific-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. [CHALLENGE] Reading a Scientific Paper
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. [CHALLENGE] Reading a Scientific Paper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-a-paper-the-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read a Paper (The Secret)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-challenge-read-the-drop-seq-abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Challenge: Read the Drop-seq Abstract
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-key-vocabulary-this-week" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Key Vocabulary This Week
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-self-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Self-Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Self-Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepts-you-should-be-able-to-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts You Should Be Able to Explain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coding-skills-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coding Skills Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-whats-coming-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. What's Coming Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-papers-optional-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Papers (Optional Reading)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="week-1-immunology-foundations">Week 1: Immunology Foundations<a class="headerlink" href="#week-1-immunology-foundations" title="Permanent link">&para;</a></h1>
+<p><strong>Estimated time: 5-8 hours</strong></p>
+<p>Welcome to Week 1 of the Computational Immunology Bootcamp! Last week you set up your
+computing environment -- Python, Miniconda, R, Git, and Jupyter Notebook. This week you
+will learn the biology that makes computational immunology possible, and you will write
+your first Python code to explore real immune cell data. No biology or programming
+background is assumed. Take your time, re-read sections that feel confusing, and remember:
+every expert was once a beginner.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-what-is-the-immune-system">What Is the Immune System?</a></li>
+<li><a href="#2-t-cells-and-b-cells-the-stars-of-adaptive-immunity">T Cells and B Cells: The Stars of Adaptive Immunity</a></li>
+<li><a href="#3-antigen-presentation-how-the-immune-system-shares-information">Antigen Presentation: How the Immune System Shares Information</a></li>
+<li><a href="#4-what-is-gene-expression">What Is Gene Expression?</a></li>
+<li><a href="#5-what-is-single-cell-rna-seq-conceptual">What Is Single-Cell RNA-seq? (Conceptual)</a></li>
+<li><a href="#6-your-first-python-notebook-exploring-immune-cell-data">Your First Python Notebook: Exploring Immune Cell Data</a></li>
+<li><a href="#7-hands-on-simple-data-exploration">Hands-On: Simple Data Exploration</a></li>
+<li><a href="#8-challenge-reading-a-scientific-paper">[CHALLENGE] Reading a Scientific Paper</a></li>
+<li><a href="#9-key-vocabulary-this-week">Key Vocabulary This Week</a></li>
+<li><a href="#10-self-check">Self-Check</a></li>
+<li><a href="#11-whats-coming-next">What's Coming Next</a></li>
+<li><a href="#key-papers-optional-reading">Key Papers (Optional Reading)</a></li>
+</ol>
+<hr />
+<h2 id="1-what-is-the-immune-system">1. What Is the Immune System?<a class="headerlink" href="#1-what-is-the-immune-system" title="Permanent link">&para;</a></h2>
+<h3 id="the-city-defense-analogy">The City Defense Analogy<a class="headerlink" href="#the-city-defense-analogy" title="Permanent link">&para;</a></h3>
+<p>Imagine your body is a large, walled city. Every day, invaders -- bacteria, viruses,
+fungi, parasites -- try to break in. Your immune system is the entire defense
+infrastructure of that city: the walls, the guards at the gates, the surveillance cameras,
+the police force, and an elite special-operations unit that remembers every criminal it has
+ever fought.</p>
+<p>The immune system is not a single organ. It is a network of cells, tissues, and molecules
+spread throughout your entire body. Its job is to (1) recognize things that do not belong,
+(2) destroy them, and (3) remember them so the response is faster next time.</p>
+<h3 id="innate-vs-adaptive-immunity">Innate vs. Adaptive Immunity<a class="headerlink" href="#innate-vs-adaptive-immunity" title="Permanent link">&para;</a></h3>
+<p>The defense system has two major branches:</p>
+<p><strong>Innate immunity</strong> is the part you are born with. Think of it as the city walls, the moat,
+and the standing army of guards. It responds to invaders within minutes to hours and
+attacks anything that looks foreign -- it does not care exactly <em>which</em> bacterium showed
+up, only that it is not "self." Innate immunity includes physical barriers (skin, mucus),
+chemical barriers (stomach acid, antimicrobial proteins), and a set of fast-responding
+immune cells. Innate immunity is broad and immediate, but it does not improve with
+experience.</p>
+<p><strong>Adaptive immunity</strong> is the elite special-forces unit. It takes days to mount on a first
+encounter, but it is extraordinarily precise: it can tell the difference between two nearly
+identical viruses. Most importantly, it has <em>memory</em>. After the first fight, adaptive
+immune cells remember the invader. If the same pathogen shows up again months or years
+later, the adaptive system responds within hours instead of days. This is why vaccines
+work -- they train the adaptive system in advance.</p>
+<h3 id="key-immune-cell-types">Key Immune Cell Types<a class="headerlink" href="#key-immune-cell-types" title="Permanent link">&para;</a></h3>
+<p>The table below lists the major cell types you will encounter repeatedly in this bootcamp.
+You do not need to memorize every detail right now, but bookmark this table so you can
+refer back to it.</p>
+<table>
+<thead>
+<tr>
+<th>Cell Type</th>
+<th>Branch</th>
+<th>Analogy</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neutrophil</strong></td>
+<td>Innate</td>
+<td>Front-line foot soldiers</td>
+<td>First to arrive at an infection site; engulfs and kills bacteria; short-lived</td>
+</tr>
+<tr>
+<td><strong>Macrophage</strong></td>
+<td>Innate</td>
+<td>Heavy-duty cleanup crew</td>
+<td>Eats (phagocytoses) pathogens and dead cells; presents pieces of what it ate to adaptive cells</td>
+</tr>
+<tr>
+<td><strong>Dendritic Cell (DC)</strong></td>
+<td>Innate (bridges to adaptive)</td>
+<td>Intelligence officers</td>
+<td>Patrols tissues, captures pathogens, travels to lymph nodes to <em>brief</em> T cells</td>
+</tr>
+<tr>
+<td><strong>NK Cell</strong></td>
+<td>Innate</td>
+<td>Undercover assassins</td>
+<td>Kills virus-infected cells and tumor cells without needing prior instructions</td>
+</tr>
+<tr>
+<td><strong>CD4+ T Cell (Helper T)</strong></td>
+<td>Adaptive</td>
+<td>Commanders / Generals</td>
+<td>Coordinates the immune response by sending chemical signals (cytokines) that activate other cells</td>
+</tr>
+<tr>
+<td><strong>CD8+ T Cell (Killer T)</strong></td>
+<td>Adaptive</td>
+<td>Special-ops assassins</td>
+<td>Directly kills infected cells by recognizing foreign fragments on their surface</td>
+</tr>
+<tr>
+<td><strong>B Cell</strong></td>
+<td>Adaptive</td>
+<td>Weapons factory</td>
+<td>Produces antibodies -- Y-shaped proteins that tag pathogens for destruction</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Quick note on "CD" numbers.</strong> CD stands for "Cluster of Differentiation." These are
+just numbered labels for specific proteins found on the surface of cells. CD4 and CD8 are
+surface proteins that help us distinguish the two major types of T cells. You will see CD
+numbers constantly in immunology -- think of them as name tags.</p>
+</blockquote>
+<p><code>[CHECKPOINT 1]</code> You should now be able to explain, in your own words, the difference
+between innate and adaptive immunity, and name at least four types of immune cells.</p>
+<hr />
+<h2 id="2-t-cells-and-b-cells-the-stars-of-adaptive-immunity">2. T Cells and B Cells: The Stars of Adaptive Immunity<a class="headerlink" href="#2-t-cells-and-b-cells-the-stars-of-adaptive-immunity" title="Permanent link">&para;</a></h2>
+<p>T cells and B cells are the two pillars of adaptive immunity. Almost everything in
+computational immunology revolves around understanding what these cells are doing, how
+diverse they are, and how they respond to threats. Let's look at each in detail.</p>
+<h3 id="t-cells-born-in-the-thymus">T Cells: Born in the Thymus<a class="headerlink" href="#t-cells-born-in-the-thymus" title="Permanent link">&para;</a></h3>
+<p>T cells are born from stem cells in the <strong>bone marrow</strong>, but they grow up and get trained
+in a small organ called the <strong>thymus</strong> (located just above your heart -- the "T" in T cell
+stands for thymus). In the thymus, young T cells go through a brutal selection process:
+any T cell that reacts too strongly to your own body's proteins is killed off. Only the
+cells that can tell "self" from "non-self" graduate and enter the bloodstream. This process
+is called <strong>thymic selection</strong>, and it is a central topic in immunology.</p>
+<p>There are two main types of mature T cells:</p>
+<ul>
+<li>
+<p><strong>CD4+ Helper T cells -- the Commanders.</strong> They do not kill anything directly. Instead,
+  they recognize threats and release chemical messengers called <strong>cytokines</strong> that tell
+  other immune cells what to do. Think of them as generals who issue orders: "B cells,
+  start making antibodies!" or "Macrophages, ramp up the inflammation!"</p>
+</li>
+<li>
+<p><strong>CD8+ Killer T cells -- the Assassins.</strong> These cells directly kill your own cells that
+  have been infected by a virus or have become cancerous. They physically dock onto the
+  sick cell and inject toxic molecules that trigger the cell to self-destruct.</p>
+</li>
+</ul>
+<h3 id="b-cells-born-in-the-bone-marrow">B Cells: Born in the Bone Marrow<a class="headerlink" href="#b-cells-born-in-the-bone-marrow" title="Permanent link">&para;</a></h3>
+<p>B cells are born <em>and</em> trained in the <strong>bone marrow</strong> (the "B" stands for bone marrow).
+Their superpower is making <strong>antibodies</strong> -- Y-shaped proteins that are released into the
+blood and body fluids. Each antibody is shaped to grab onto one specific molecular pattern
+(called an <strong>antigen</strong>). When antibodies stick to a pathogen, they can (1) neutralize it
+directly, (2) flag it so macrophages eat it faster, or (3) activate other defense systems.</p>
+<p>When a B cell encounters its matching antigen and gets the green light from a helper T
+cell, it can multiply rapidly and transform into a <strong>plasma cell</strong> -- an antibody-producing
+machine that pumps out thousands of antibody molecules per second. Some B cells instead
+become <strong>memory B cells</strong> that persist for years, ready to respond immediately if the same
+pathogen returns.</p>
+<h3 id="tcr-and-bcr-unique-receptors">TCR and BCR: Unique Receptors<a class="headerlink" href="#tcr-and-bcr-unique-receptors" title="Permanent link">&para;</a></h3>
+<p>Here is one of the most remarkable facts in biology: every single T cell carries a unique
+receptor on its surface called the <strong>T Cell Receptor (TCR)</strong>, and every B cell carries a
+unique <strong>B Cell Receptor (BCR)</strong>. "Unique" means that your body contains millions of
+different T cells, each with a slightly different receptor shape.</p>
+<p>Think of it this way: every T cell has a unique <strong>lock</strong>, and it is searching for the one
+specific <strong>key</strong> (antigen) that fits. When the key fits the lock, the T cell activates and
+mounts an immune response. The same logic applies to B cells and their BCRs.</p>
+<p>This raises an obvious question: you only have about 20,000 genes. How can your body
+produce millions of unique receptor shapes?</p>
+<h3 id="vdj-recombination-shuffling-the-deck">VDJ Recombination: Shuffling the Deck<a class="headerlink" href="#vdj-recombination-shuffling-the-deck" title="Permanent link">&para;</a></h3>
+<p>The answer is <strong>VDJ recombination</strong>, one of the most elegant tricks in biology. The genes
+that encode TCRs and BCRs are not stored as single, complete genes. Instead, they are
+stored in segments: <strong>V</strong> (Variable), <strong>D</strong> (Diversity), and <strong>J</strong> (Joining) segments.
+There are many versions of each segment.</p>
+<p>When a new T cell or B cell is developing, the cell's DNA-editing machinery randomly picks
+one V segment, one D segment, and one J segment, and permanently splices them together.
+It also adds or removes a few random letters (nucleotides) at the junctions. This
+combinatorial process is like shuffling a deck of cards and then cutting the deck at random
+positions -- the number of possible combinations is astronomical.</p>
+<p>Here is a simplified example:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Gene segments in your genome:
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  V segments:  V1, V2, V3, V4, V5, ... (dozens of options)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  D segments:  D1, D2, D3, ...          (a handful of options)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  J segments:  J1, J2, J3, J4, ...      (several options)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>One cell picks:  V3 -- random letters -- D1 -- random letters -- J4
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>Another picks:   V5 -- random letters -- D2 -- random letters -- J1
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Result: Each cell has a unique receptor sequence.
+</span></code></pre></div>
+<p>VDJ recombination can theoretically generate more than 10^15 (a quadrillion) different
+receptor sequences. This diversity is the reason your adaptive immune system can recognize
+virtually any pathogen it might encounter, including ones that have never existed before.</p>
+<p>The specific region where the V, D, and J segments join -- including the random insertions
+-- is called the <strong>CDR3</strong> (Complementarity-Determining Region 3). The CDR3 is the most
+variable part of the receptor and is the main determinant of what antigen the receptor will
+bind. When computational immunologists analyze TCR or BCR data, the CDR3 sequence is
+usually the star of the show.</p>
+<p><code>[CHECKPOINT 2]</code> You should now be able to explain: (a) where T cells and B cells mature,
+(b) what CD4 and CD8 T cells do, (c) what antibodies are, and (d) how VDJ recombination
+generates receptor diversity.</p>
+<hr />
+<h2 id="3-antigen-presentation-how-the-immune-system-shares-information">3. Antigen Presentation: How the Immune System Shares Information<a class="headerlink" href="#3-antigen-presentation-how-the-immune-system-shares-information" title="Permanent link">&para;</a></h2>
+<p>For adaptive immunity to work, T cells need to "see" what is going on inside cells. But
+T cells cannot peek inside other cells directly. Instead, the immune system has evolved an
+elegant information-sharing system based on molecules called <strong>MHC</strong> (Major
+Histocompatibility Complex).</p>
+<h3 id="mhc-class-i-showing-your-id-badge">MHC Class I: Showing Your ID Badge<a class="headerlink" href="#mhc-class-i-showing-your-id-badge" title="Permanent link">&para;</a></h3>
+<p>Every nucleated cell in your body (that is, nearly every cell except red blood cells)
+displays <strong>MHC class I</strong> molecules on its surface. Think of MHC I as a display shelf on
+the outside of a cell. The cell constantly chops up some of the proteins it is making
+inside, and places small fragments (peptides) onto MHC I molecules for display.</p>
+<p>If the cell is healthy, the displayed fragments are all "self" -- normal human proteins.
+CD8+ killer T cells patrol the body and glance at these displays. When they see normal
+self-peptides, they move on. But if a cell is infected by a virus, some of the displayed
+fragments will come from viral proteins. A CD8+ T cell whose receptor matches that viral
+fragment will recognize it, dock onto the cell, and kill it.</p>
+<p><strong>Analogy:</strong> Imagine every person in a building is required to wear an ID badge showing
+what they have been working on. Security guards (CD8 T cells) walk the halls glancing at
+badges. If your badge shows normal work, they pass by. If your badge shows you have been
+making counterfeit money (viral proteins), the guard takes you down.</p>
+<h3 id="mhc-class-ii-briefing-the-commanders">MHC Class II: Briefing the Commanders<a class="headerlink" href="#mhc-class-ii-briefing-the-commanders" title="Permanent link">&para;</a></h3>
+<p><strong>MHC class II</strong> molecules are only found on a special group of cells called
+<strong>antigen-presenting cells (APCs)</strong>. The main APCs are <strong>dendritic cells</strong>, <strong>macrophages</strong>,
+and <strong>B cells</strong>. These cells eat (phagocytose) pathogens, chop them up, and display the
+fragments on MHC II molecules.</p>
+<p>MHC II presentations are read by <strong>CD4+ helper T cells</strong>. When a helper T cell sees a
+foreign fragment on MHC II, it activates and starts coordinating the immune response --
+sending out cytokines, helping B cells make antibodies, and boosting killer T cell activity.</p>
+<p><strong>Analogy:</strong> Antigen-presenting cells are like intelligence officers who capture an enemy
+spy, take their photo and fingerprints, and bring the dossier to the generals (CD4+ T
+cells). The generals then decide the battle plan.</p>
+<h3 id="summary-diagram-text-version">Summary Diagram (Text Version)<a class="headerlink" href="#summary-diagram-text-version" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  INSIDE AN INFECTED CELL                 ANTIGEN-PRESENTING CELL
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  +-------------------------+             +-------------------------+
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  |  Virus replicating      |             |  Eats pathogen          |
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  |  inside the cell        |             |  Chops it up            |
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  |                         |             |                         |
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  |  Viral protein fragment |             |  Pathogen fragment      |
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  |  loaded onto MHC I      |             |  loaded onto MHC II     |
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  +--------|----------------+             +--------|----------------+
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>           |                                       |
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>           v                                       v
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    Displayed on cell surface              Displayed on cell surface
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>           |                                       |
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>           v                                       v
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    CD8+ Killer T cell sees it          CD4+ Helper T cell sees it
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    --&gt; Kills the infected cell          --&gt; Activates immune response
+</span></code></pre></div>
+<p><code>[CHECKPOINT 3]</code> You should now be able to explain the difference between MHC class I and
+MHC class II, and which type of T cell reads each one.</p>
+<hr />
+<h2 id="4-what-is-gene-expression">4. What Is Gene Expression?<a class="headerlink" href="#4-what-is-gene-expression" title="Permanent link">&para;</a></h2>
+<p>Before we can understand single-cell RNA-seq (the technology at the heart of this
+bootcamp), we need to understand a foundational concept in biology: <strong>gene expression</strong>.</p>
+<h3 id="dna-rna-protein-the-central-dogma">DNA -&gt; RNA -&gt; Protein: The Central Dogma<a class="headerlink" href="#dna-rna-protein-the-central-dogma" title="Permanent link">&para;</a></h3>
+<p>Your DNA is like a massive recipe book stored in the nucleus of every cell. Each <strong>gene</strong>
+is one recipe -- instructions for building one specific protein. Proteins are the molecular
+machines that do almost everything in your body: they form structures, speed up chemical
+reactions, carry signals, and fight infections.</p>
+<p>But DNA itself does not leave the nucleus. When a cell needs to build a specific protein,
+it makes a temporary copy of the relevant gene. That copy is called <strong>messenger RNA
+(mRNA)</strong>. The mRNA travels out of the nucleus and is read by molecular machines called
+<strong>ribosomes</strong>, which use the instructions to assemble the protein.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>DNA  ---[transcription]---&gt;  mRNA  ---[translation]---&gt;  Protein
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>(recipe book)                (photocopy of one recipe)   (the dish)
+</span></code></pre></div>
+<p>This flow -- DNA to RNA to Protein -- is called the <strong>Central Dogma of Molecular Biology</strong>.</p>
+<h3 id="why-gene-expression-matters">Why Gene Expression Matters<a class="headerlink" href="#why-gene-expression-matters" title="Permanent link">&para;</a></h3>
+<p>Here is the key insight: <strong>every cell in your body has the same DNA</strong> (the same recipe
+book), but different cells "read" different recipes. A liver cell turns on liver-specific
+genes and turns off brain-specific genes. A T cell turns on immune-related genes and turns
+off muscle-specific genes. The set of genes that a cell has turned on (expressed) at any
+given moment defines that cell's identity and behavior.</p>
+<p>When we say a gene is <strong>"expressed"</strong>, we mean the cell is actively making mRNA copies of
+that gene. The more mRNA copies, the more protein the cell is probably making, and the more
+"active" that gene is in that cell.</p>
+<h3 id="this-is-what-single-cell-rna-seq-measures">This Is What Single-Cell RNA-seq Measures<a class="headerlink" href="#this-is-what-single-cell-rna-seq-measures" title="Permanent link">&para;</a></h3>
+<p>Single-cell RNA-seq captures and counts the mRNA molecules in individual cells. By
+measuring which genes are expressed and how strongly, we can figure out:</p>
+<ul>
+<li>What type of cell it is (T cell? B cell? macrophage?)</li>
+<li>What the cell is doing right now (resting? activated? dividing?)</li>
+<li>How the cell differs from its neighbors</li>
+</ul>
+<p><code>[CHECKPOINT 4]</code> You should now be able to explain the Central Dogma (DNA -&gt; RNA -&gt;
+Protein) and why different cells express different genes even though they share the same
+DNA.</p>
+<hr />
+<h2 id="5-what-is-single-cell-rna-seq-conceptual">5. What Is Single-Cell RNA-seq? (Conceptual)<a class="headerlink" href="#5-what-is-single-cell-rna-seq-conceptual" title="Permanent link">&para;</a></h2>
+<h3 id="the-old-way-bulk-rna-seq">The Old Way: Bulk RNA-seq<a class="headerlink" href="#the-old-way-bulk-rna-seq" title="Permanent link">&para;</a></h3>
+<p>Before single-cell technology, scientists would take a tissue sample containing thousands
+or millions of cells, grind them all up together, and measure the average gene expression
+across all those cells. This is called <strong>bulk RNA-seq</strong>.</p>
+<p><strong>Analogy:</strong> Imagine you have a fruit salad with strawberries, blueberries, mangoes, and
+kiwis. You throw the entire salad into a blender and taste the smoothie. You can tell it
+is fruity, maybe sweet and tart, but you cannot tell exactly which fruits were in the
+salad, their proportions, or what any individual piece of fruit tasted like.</p>
+<p>Bulk RNA-seq has the same problem. If your sample contains 60% T cells and 40% B cells,
+you get a blended average. You cannot see the individual cell types or rare subpopulations.</p>
+<h3 id="the-new-way-single-cell-rna-seq-scrna-seq">The New Way: Single-Cell RNA-seq (scRNA-seq)<a class="headerlink" href="#the-new-way-single-cell-rna-seq-scrna-seq" title="Permanent link">&para;</a></h3>
+<p>Single-cell RNA-seq measures gene expression in <strong>each cell individually</strong>. Instead of
+blending the fruit salad, you taste each piece of fruit one at a time. Now you know
+exactly how many strawberries there are, what each one tastes like, and whether any
+individual strawberry is different from the rest.</p>
+<p>This technology has revolutionized biology. Since about 2015, single-cell methods have
+allowed scientists to discover new cell types, track how cells change during development,
+and understand how diseases alter immune responses at unprecedented resolution.</p>
+<h3 id="how-10x-genomics-works-simplified">How 10x Genomics Works (Simplified)<a class="headerlink" href="#how-10x-genomics-works-simplified" title="Permanent link">&para;</a></h3>
+<p>The most widely used single-cell RNA-seq platform is made by a company called <strong>10x
+Genomics</strong>. Here is a simplified version of how it works:</p>
+<ol>
+<li><strong>Cell suspension:</strong> You start with a mixture of individual cells in liquid.</li>
+<li><strong>Droplet formation:</strong> A microfluidic chip combines the cells with tiny gel beads in
+   oil, forming thousands of nanoliter-sized droplets. Each droplet ideally contains
+   <strong>one cell</strong> and <strong>one bead</strong>.</li>
+<li><strong>Barcoding:</strong> Each bead is coated with millions of DNA primers that all share the same
+   unique <strong>barcode</strong> sequence. When the cell's mRNA is captured by the bead's primers,
+   every mRNA molecule from that cell gets tagged with the bead's barcode.</li>
+<li><strong>Sequencing:</strong> All the barcoded mRNA is pooled together and sequenced on a standard
+   DNA sequencer.</li>
+<li><strong>Computational demultiplexing:</strong> A computer reads the barcode on each sequenced
+   molecule and assigns it back to the correct cell of origin. The result is a count of
+   how many mRNA molecules of each gene were detected in each cell.</li>
+</ol>
+<h3 id="the-data-a-cells-by-genes-matrix">The Data: A Cells-by-Genes Matrix<a class="headerlink" href="#the-data-a-cells-by-genes-matrix" title="Permanent link">&para;</a></h3>
+<p>The end product of a single-cell RNA-seq experiment is a large matrix (spreadsheet):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>             Gene_A  Gene_B  Gene_C  Gene_D  ...  Gene_20000
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Cell_001        0       3       0      12     ...      0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Cell_002        5       0       1       0     ...      2
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Cell_003        0       0       0       8     ...      0
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>   ...
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Cell_2700       1       7       0       0     ...      0
+</span></code></pre></div>
+<ul>
+<li><strong>Rows</strong> = individual cells (identified by their barcodes)</li>
+<li><strong>Columns</strong> = genes (about 20,000 in humans)</li>
+<li><strong>Values</strong> = the number of mRNA molecules detected for that gene in that cell (called
+  "counts" or "UMI counts")</li>
+</ul>
+<p>Notice how many zeros there are. Single-cell data is very <strong>sparse</strong> -- most genes in any
+given cell have zero detected counts. This is partly because each cell only expresses a
+fraction of all genes, and partly because the technology does not capture every single mRNA
+molecule (a phenomenon called <strong>dropout</strong>).</p>
+<p>This matrix is what you will load and analyze in the hands-on exercises below.</p>
+<p><code>[CHECKPOINT 5]</code> You should now be able to explain: (a) the difference between bulk and
+single-cell RNA-seq, (b) the basic idea behind how 10x Genomics captures single cells,
+and (c) what a cells-by-genes matrix looks like.</p>
+<hr />
+<h2 id="6-your-first-python-notebook-exploring-immune-cell-data">6. Your First Python Notebook: Exploring Immune Cell Data<a class="headerlink" href="#6-your-first-python-notebook-exploring-immune-cell-data" title="Permanent link">&para;</a></h2>
+<p><strong>[REQUIRED]</strong></p>
+<p>Time to write code! In this exercise you will open a Jupyter Notebook, load a real
+single-cell dataset of human immune cells, and explore its basic structure. This dataset
+-- called <strong>pbmc3k</strong> -- contains approximately 2,700 <strong>peripheral blood mononuclear cells
+(PBMCs)</strong> from a healthy human donor. PBMCs are immune cells isolated from blood, so
+this dataset contains a mixture of T cells, B cells, NK cells, monocytes, and dendritic
+cells.</p>
+<h3 id="step-1-activate-your-environment-and-launch-jupyter">Step 1: Activate Your Environment and Launch Jupyter<a class="headerlink" href="#step-1-activate-your-environment-and-launch-jupyter" title="Permanent link">&para;</a></h3>
+<p>Open your terminal and type the following commands, one at a time:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>jupyter<span class="w"> </span>notebook
+</span></code></pre></div>
+<p>Your web browser should open with the Jupyter file browser. Navigate to a folder where you
+want to keep your work for this bootcamp (for example, create a folder called
+<code>week_1_immunology_foundations</code> if you have not already).</p>
+<p>Click <strong>New -&gt; Python 3</strong> to create a new notebook. Rename it to
+<strong><code>week1_explore_pbmc3k.ipynb</code></strong> by clicking on the title at the top.</p>
+<h3 id="step-2-install-scanpy-if-not-already-installed">Step 2: Install scanpy (if not already installed)<a class="headerlink" href="#step-2-install-scanpy-if-not-already-installed" title="Permanent link">&para;</a></h3>
+<p>In the first cell of your notebook, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Run this cell only once -- it installs the scanpy package</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># After it finishes, you can delete or skip this cell</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">scanpy</span>
+</span></code></pre></div>
+<p>Wait for the installation to complete. You will see output scrolling by as packages are
+downloaded. When it finishes, you should see a line near the end that says something like:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Successfully installed scanpy-X.X.X ...
+</span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> If you already installed scanpy during Week 0, this cell will simply confirm
+that the requirement is already satisfied. That is fine.</p>
+</blockquote>
+<h3 id="step-3-import-libraries">Step 3: Import Libraries<a class="headerlink" href="#step-3-import-libraries" title="Permanent link">&para;</a></h3>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All imports successful!&quot;</span><span class="p">)</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scanpy version: </span><span class="si">{</span><span class="n">sc</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>All imports successful!
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Scanpy version: 1.x.x
+</span></code></pre></div>
+<p>(The exact version number may differ -- that is fine.)</p>
+<h3 id="step-4-load-the-pbmc-3k-dataset">Step 4: Load the PBMC 3k Dataset<a class="headerlink" href="#step-4-load-the-pbmc-3k-dataset" title="Permanent link">&para;</a></h3>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Download a small practice dataset of ~2,700 blood immune cells</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># This is built into scanpy, so no manual download is needed</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">pbmc3k</span><span class="p">()</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output (approximately):</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>AnnData object with n_obs x n_vars = 2700 x 32738
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    var: &#39;gene_ids&#39;
+</span></code></pre></div>
+<p>Let's break down what this output means:</p>
+<ul>
+<li><strong>AnnData object</strong>: This is the data structure that scanpy uses to store single-cell
+  data. Think of it as a smart spreadsheet that holds not just the data matrix but also
+  metadata about cells and genes.</li>
+<li><strong>n_obs = 2700</strong>: There are 2,700 observations (cells).</li>
+<li><strong>n_vars = 32738</strong>: There are 32,738 variables (genes).</li>
+<li><strong>var: 'gene_ids'</strong>: The gene table has a column called 'gene_ids' that stores Ensembl
+  gene identifiers (a standardized naming system).</li>
+</ul>
+<h3 id="step-5-explore-the-data-shape">Step 5: Explore the Data Shape<a class="headerlink" href="#step-5-explore-the-data-shape" title="Permanent link">&para;</a></h3>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># How many cells and genes are in this dataset?</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of cells: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">n_obs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of genes: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">n_vars</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Number of cells: 2700
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Number of genes: 32738
+</span></code></pre></div>
+<h3 id="step-6-look-at-gene-names-and-cell-barcodes">Step 6: Look at Gene Names and Cell Barcodes<a class="headerlink" href="#step-6-look-at-gene-names-and-cell-barcodes" title="Permanent link">&para;</a></h3>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Look at some gene names</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 10 genes:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">print</span><span class="p">()</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># Look at some cell barcodes</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 5 cells:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs_names</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+</span></code></pre></div>
+<p><strong>Expected output (approximately):</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>First 10 genes: [&#39;MIR1302-10&#39;, &#39;FAM138A&#39;, &#39;OR4F5&#39;, &#39;RP11-34P13.7&#39;, &#39;RP11-34P13.8&#39;, &#39;AL627309.1&#39;, &#39;RP11-34P13.14&#39;, &#39;RP11-34P13.9&#39;, &#39;AP006222.2&#39;, &#39;RP4-669L17.10&#39;]
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>First 5 cells: [&#39;AAACATACAACCAC-1&#39;, &#39;AAACATTGAGCTAC-1&#39;, &#39;AAACATTGATCAGC-1&#39;, &#39;AAACCGTGCTTCCG-1&#39;, &#39;AAACCGTGTATGCG-1&#39;]
+</span></code></pre></div>
+<p>The gene names are human gene symbols (some look cryptic -- that is normal). The cell
+names are barcode sequences assigned by the 10x Genomics instrument, with a <code>-1</code> suffix
+indicating the sample.</p>
+<h3 id="step-7-peek-at-the-data-matrix">Step 7: Peek at the Data Matrix<a class="headerlink" href="#step-7-peek-at-the-data-matrix" title="Permanent link">&para;</a></h3>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Look at the raw data matrix</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data matrix type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data matrix shape: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Data matrix type: &lt;class &#39;scipy.sparse.csr_matrix&#39;&gt;
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Data matrix shape: (2700, 32738)
+</span></code></pre></div>
+<p>The data is stored as a <strong>sparse matrix</strong> -- a special format that efficiently stores data
+with lots of zeros (which, as we discussed, single-cell data has plenty of). Instead of
+storing every single zero, it only stores the non-zero values and their positions.</p>
+<p><code>[CHECKPOINT 6]</code> Congratulations! You have successfully loaded a real single-cell dataset
+in Python. You know it contains 2,700 cells and over 32,000 genes. You have seen gene
+names and cell barcodes. You are officially doing computational biology.</p>
+<hr />
+<h2 id="7-hands-on-simple-data-exploration">7. Hands-On: Simple Data Exploration<a class="headerlink" href="#7-hands-on-simple-data-exploration" title="Permanent link">&para;</a></h2>
+<p><strong>[REQUIRED]</strong></p>
+<p>Now let's go further. Continue in the same Jupyter notebook.</p>
+<h3 id="step-1-how-many-genes-does-each-cell-express">Step 1: How Many Genes Does Each Cell Express?<a class="headerlink" href="#step-1-how-many-genes-does-each-cell-express" title="Permanent link">&para;</a></h3>
+<p>Not every gene is active in every cell. Let's count how many genes have non-zero expression
+in each cell.</p>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Count the number of genes with nonzero expression in each cell</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1"># adata.X is a sparse matrix; indptr marks the start/end of each row&#39;s data</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">genes_per_cell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">indptr</span><span class="p">)</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average genes per cell: </span><span class="si">{</span><span class="n">genes_per_cell</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimum: </span><span class="si">{</span><span class="n">genes_per_cell</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum: </span><span class="si">{</span><span class="n">genes_per_cell</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">genes_per_cell</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output (approximately):</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Average genes per cell: 817
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>Minimum: 212
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>Maximum: 4538
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>Median: 718
+</span></code></pre></div>
+<p>(Your exact numbers may vary slightly depending on the scanpy version.)</p>
+<p>What does this tell us? On average, each cell expresses about 800 genes out of the 32,000+
+in the genome. Some cells express as few as ~200 genes (these might be low-quality cells or
+a cell type that is relatively inactive), and some express over 4,000 (these might be large,
+highly active cells). This range is typical for 10x Genomics scRNA-seq data.</p>
+<h3 id="step-2-visualize-with-a-histogram">Step 2: Visualize with a Histogram<a class="headerlink" href="#step-2-visualize-with-a-histogram" title="Permanent link">&para;</a></h3>
+<p>A histogram is one of the most useful plots in data science. It shows the distribution of
+a variable -- in this case, how many cells have a given number of expressed genes.</p>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">genes_per_cell</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Genes Detected&#39;</span><span class="p">)</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Cells&#39;</span><span class="p">)</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Genes per Cell&#39;</span><span class="p">)</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;genes_per_cell.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A histogram should appear below the cell. You should see a
+right-skewed distribution -- most cells cluster on the left side (expressing a moderate
+number of genes), with a long tail to the right (a smaller number of cells expressing
+many genes).</p>
+<p><strong>What does this histogram tell us?</strong></p>
+<ul>
+<li>The <strong>peak</strong> of the distribution (the tallest bar) tells you the most common number of
+  genes per cell -- roughly 500-700 for this dataset.</li>
+<li>The <strong>spread</strong> tells you about cell diversity. Some cells are more active than others.</li>
+<li>Cells in the far left tail (very few genes) might be dead or dying cells -- this is
+  something we will learn to filter out in Week 2.</li>
+<li>Cells in the far right tail (very many genes) might be <strong>doublets</strong> -- two cells that
+  were accidentally captured in the same droplet, so their mRNA got mixed.</li>
+</ul>
+<p>The file <code>genes_per_cell.png</code> has been saved to your current directory. You just created
+a publication-quality figure from real data.</p>
+<h3 id="step-3-check-a-specific-gene">Step 3: Check a Specific Gene<a class="headerlink" href="#step-3-check-a-specific-gene" title="Permanent link">&para;</a></h3>
+<p>Let's look at a specific immune-related gene. <strong>CD3D</strong> is a gene that is expressed
+primarily in T cells. Let's see how its expression looks across cells.</p>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Check if CD3D is in the dataset</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">if</span> <span class="s1">&#39;CD3D&#39;</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="p">:</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="c1"># Get the expression values for CD3D across all cells</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="n">cd3d_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;CD3D&#39;</span><span class="p">)</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="n">cd3d_expression</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">[:,</span> <span class="n">cd3d_index</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>    <span class="c1"># How many cells express this gene?</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    <span class="n">n_expressing</span> <span class="o">=</span> <span class="p">(</span><span class="n">cd3d_expression</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CD3D is expressed in </span><span class="si">{</span><span class="n">n_expressing</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">n_obs</span><span class="si">}</span><span class="s2"> cells &quot;</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>          <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_expressing</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">adata</span><span class="o">.</span><span class="n">n_obs</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean expression (all cells): </span><span class="si">{</span><span class="n">cd3d_expression</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean expression (expressing cells only): &quot;</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cd3d_expression</span><span class="p">[</span><span class="n">cd3d_expression</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CD3D not found in this dataset.&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output (approximately):</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>CD3D is expressed in 816 out of 2700 cells (30.2%)
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Mean expression (all cells): 0.68
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Mean expression (expressing cells only): 2.24
+</span></code></pre></div>
+<p>This makes biological sense. PBMCs are a mixture of many immune cell types, and T cells
+make up roughly 40-70% of PBMCs. Not all T cells will have detectable CD3D due to dropout,
+so detecting it in ~30% of cells is reasonable. The cells that do express it have a mean
+count of about 2 -- meaning on average, each T cell had about 2 mRNA molecules of CD3D
+captured.</p>
+<h3 id="step-4-compare-two-marker-genes">Step 4: Compare Two Marker Genes<a class="headerlink" href="#step-4-compare-two-marker-genes" title="Permanent link">&para;</a></h3>
+<p>Let's compare a T cell marker (CD3D) with a B cell marker (CD79A).</p>
+<p>In a new cell, type and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Get expression for two marker genes</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_gene_expression</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">gene_name</span><span class="p">):</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract expression values for a single gene.&quot;&quot;&quot;</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gene_name</span><span class="p">)</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    <span class="k">return</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="n">cd3d</span> <span class="o">=</span> <span class="n">get_gene_expression</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s1">&#39;CD3D&#39;</span><span class="p">)</span>   <span class="c1"># T cell marker</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="n">cd79a</span> <span class="o">=</span> <span class="n">get_gene_expression</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s1">&#39;CD79A&#39;</span><span class="p">)</span>  <span class="c1"># B cell marker</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">cd3d</span><span class="p">[</span><span class="n">cd3d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CD3D Expression (T cell marker)&#39;</span><span class="p">)</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Expression Level (counts)&#39;</span><span class="p">)</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Cells&#39;</span><span class="p">)</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">cd79a</span><span class="p">[</span><span class="n">cd79a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CD79A Expression (B cell marker)&#39;</span><span class="p">)</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Expression Level (counts)&#39;</span><span class="p">)</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Cells&#39;</span><span class="p">)</span>
+</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>
+</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;marker_genes.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</span><span id="__span-22-24"><a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span><span id="__span-22-25"><a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>
+</span><span id="__span-22-26"><a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cells expressing CD3D (T cells):  </span><span class="si">{</span><span class="p">(</span><span class="n">cd3d</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-22-27"><a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cells expressing CD79A (B cells): </span><span class="si">{</span><span class="p">(</span><span class="n">cd79a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-22-28"><a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cells expressing both:            </span><span class="si">{</span><span class="p">((</span><span class="n">cd3d</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">cd79a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-22-29"><a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cells expressing neither:         </span><span class="si">{</span><span class="p">((</span><span class="n">cd3d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">cd79a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> Two side-by-side histograms and printed counts. You should see that
+CD3D is expressed in more cells than CD79A (there are more T cells than B cells in blood),
+and very few cells express both markers (because a cell is usually either a T cell or a B
+cell, not both). The "neither" group includes NK cells, monocytes, dendritic cells, and
+other cell types that express different markers.</p>
+<p><code>[CHECKPOINT 7]</code> You just visualized real scientific data from 2,700 human immune cells!
+You computed summary statistics, made histograms, and investigated specific marker genes.
+These are foundational skills in computational biology.</p>
+<hr />
+<h2 id="8-challenge-reading-a-scientific-paper">8. [CHALLENGE] Reading a Scientific Paper<a class="headerlink" href="#8-challenge-reading-a-scientific-paper" title="Permanent link">&para;</a></h2>
+<p>This section is optional but highly recommended. Learning to read scientific papers is a
+critical skill, and the earlier you start, the better.</p>
+<h3 id="how-to-read-a-paper-the-secret">How to Read a Paper (The Secret)<a class="headerlink" href="#how-to-read-a-paper-the-secret" title="Permanent link">&para;</a></h3>
+<p>Do <strong>not</strong> read a scientific paper from start to finish like a novel. That is a common
+mistake. Instead, follow this order:</p>
+<ol>
+<li>
+<p><strong>Title and Abstract</strong> -- Read these carefully. The abstract is a ~200-word summary of
+   the entire paper. After reading it, you should know the main question, approach, and
+   key finding.</p>
+</li>
+<li>
+<p><strong>Figures and Figure Legends</strong> -- Skip straight to the figures. In biology, the figures
+   tell the story. Read the figure legends (captions) carefully. Try to understand what
+   each panel shows.</p>
+</li>
+<li>
+<p><strong>Introduction (last paragraph)</strong> -- The last paragraph of the introduction almost
+   always states the specific goals of the paper.</p>
+</li>
+<li>
+<p><strong>Results section</strong> -- Now read the results, referring to the figures as you go.</p>
+</li>
+<li>
+<p><strong>Methods</strong> -- Only read this if you want to understand <em>how</em> they did something
+   specific.</p>
+</li>
+<li>
+<p><strong>Discussion</strong> -- Read this to understand the broader implications and limitations.</p>
+</li>
+</ol>
+<h3 id="your-challenge-read-the-drop-seq-abstract">Your Challenge: Read the Drop-seq Abstract<a class="headerlink" href="#your-challenge-read-the-drop-seq-abstract" title="Permanent link">&para;</a></h3>
+<p>Look up this paper:</p>
+<blockquote>
+<p>Macosko EZ, Basu A, Satija R, et al. "Highly Parallel Genome-wide Expression Profiling
+of Individual Cells Using Nanoliter Droplets." <em>Cell</em>, 2015.</p>
+</blockquote>
+<p>You can find it by searching for "Macosko 2015 Cell Drop-seq" on Google Scholar
+(scholar.google.com). Read only the <strong>abstract</strong> and look at <strong>Figure 1</strong> (which shows
+the Drop-seq technology).</p>
+<p>After reading, try to answer these three questions:</p>
+<ol>
+<li>What problem were the authors trying to solve?</li>
+<li>What technology did they develop, and what is the basic idea?</li>
+<li>How many cells did they analyze in their main experiment?</li>
+</ol>
+<p>Do not worry if you do not understand every word. The goal is to practice the skill of
+extracting key information from a scientific paper. You will get better at this with time.</p>
+<hr />
+<h2 id="9-key-vocabulary-this-week">9. Key Vocabulary This Week<a class="headerlink" href="#9-key-vocabulary-this-week" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Innate immunity</strong></td>
+<td>The branch of the immune system you are born with; fast but non-specific</td>
+</tr>
+<tr>
+<td><strong>Adaptive immunity</strong></td>
+<td>The branch that develops specific responses and remembers past infections</td>
+</tr>
+<tr>
+<td><strong>Antigen</strong></td>
+<td>Any molecule (usually a protein fragment) that can be recognized by the immune system</td>
+</tr>
+<tr>
+<td><strong>Antibody</strong></td>
+<td>A Y-shaped protein made by B cells that binds to a specific antigen</td>
+</tr>
+<tr>
+<td><strong>T cell</strong></td>
+<td>An adaptive immune cell that matures in the thymus; includes CD4+ helper and CD8+ killer types</td>
+</tr>
+<tr>
+<td><strong>B cell</strong></td>
+<td>An adaptive immune cell that matures in bone marrow and produces antibodies</td>
+</tr>
+<tr>
+<td><strong>CD4+ T cell</strong></td>
+<td>Helper T cell; coordinates immune responses by releasing cytokines</td>
+</tr>
+<tr>
+<td><strong>CD8+ T cell</strong></td>
+<td>Killer (cytotoxic) T cell; directly destroys infected or cancerous cells</td>
+</tr>
+<tr>
+<td><strong>NK cell</strong></td>
+<td>Natural Killer cell; an innate lymphocyte that kills virus-infected and tumor cells</td>
+</tr>
+<tr>
+<td><strong>Macrophage</strong></td>
+<td>An innate immune cell that eats pathogens and presents antigens</td>
+</tr>
+<tr>
+<td><strong>Dendritic cell</strong></td>
+<td>An innate immune cell that captures antigens and presents them to T cells</td>
+</tr>
+<tr>
+<td><strong>TCR</strong></td>
+<td>T Cell Receptor; a unique surface protein on each T cell that recognizes a specific antigen</td>
+</tr>
+<tr>
+<td><strong>BCR</strong></td>
+<td>B Cell Receptor; a unique surface protein on each B cell; the membrane-bound form of an antibody</td>
+</tr>
+<tr>
+<td><strong>VDJ recombination</strong></td>
+<td>The process of randomly assembling V, D, and J gene segments to create diverse receptors</td>
+</tr>
+<tr>
+<td><strong>CDR3</strong></td>
+<td>Complementarity-Determining Region 3; the most variable part of the TCR/BCR, key for antigen binding</td>
+</tr>
+<tr>
+<td><strong>MHC class I</strong></td>
+<td>A molecule on all nucleated cells that presents intracellular peptides to CD8+ T cells</td>
+</tr>
+<tr>
+<td><strong>MHC class II</strong></td>
+<td>A molecule on antigen-presenting cells that presents extracellular peptides to CD4+ T cells</td>
+</tr>
+<tr>
+<td><strong>Gene expression</strong></td>
+<td>The process by which information in a gene is used to make a functional product (usually a protein)</td>
+</tr>
+<tr>
+<td><strong>Central Dogma</strong></td>
+<td>The flow of genetic information: DNA -&gt; RNA -&gt; Protein</td>
+</tr>
+<tr>
+<td><strong>mRNA</strong></td>
+<td>Messenger RNA; the temporary copy of a gene that is used as a template for protein synthesis</td>
+</tr>
+<tr>
+<td><strong>scRNA-seq</strong></td>
+<td>Single-cell RNA sequencing; a technology that measures gene expression in individual cells</td>
+</tr>
+<tr>
+<td><strong>10x Genomics</strong></td>
+<td>A company that makes the most widely used scRNA-seq platform</td>
+</tr>
+<tr>
+<td><strong>UMI</strong></td>
+<td>Unique Molecular Identifier; a short barcode used to count individual mRNA molecules</td>
+</tr>
+<tr>
+<td><strong>AnnData</strong></td>
+<td>The data structure used by scanpy to store single-cell datasets</td>
+</tr>
+<tr>
+<td><strong>Sparse matrix</strong></td>
+<td>A data format that efficiently stores matrices with many zero values</td>
+</tr>
+<tr>
+<td><strong>PBMC</strong></td>
+<td>Peripheral Blood Mononuclear Cells; immune cells isolated from blood</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-self-check">10. Self-Check<a class="headerlink" href="#10-self-check" title="Permanent link">&para;</a></h2>
+<h3 id="concepts-you-should-be-able-to-explain">Concepts You Should Be Able to Explain<a class="headerlink" href="#concepts-you-should-be-able-to-explain" title="Permanent link">&para;</a></h3>
+<p>Go through this checklist. For each item, try to explain it in your own words (out loud or
+written down) without looking at the material above. If you cannot, go back and re-read
+that section.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The difference between innate and adaptive immunity</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What neutrophils, macrophages, and dendritic cells do (innate)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What CD4+ helper T cells and CD8+ killer T cells do</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What B cells and antibodies do</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Where T cells and B cells mature</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What a TCR and BCR are</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> How VDJ recombination generates millions of unique receptors</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What MHC class I presents and to which T cell type</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What MHC class II presents and to which T cell type</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The Central Dogma: DNA -&gt; RNA -&gt; Protein</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Why different cell types express different genes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The difference between bulk RNA-seq and single-cell RNA-seq</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> What a cells-by-genes matrix looks like and what the values represent</li>
+</ul>
+<h3 id="test-questions">Test Questions<a class="headerlink" href="#test-questions" title="Permanent link">&para;</a></h3>
+<p>Try to answer these without looking:</p>
+<ol>
+<li>What is the difference between innate and adaptive immunity?</li>
+<li>What do CD4+ T cells do? What about CD8+ T cells?</li>
+<li>What is VDJ recombination and why does it matter?</li>
+<li>What molecule do B cells produce, and what shape is it?</li>
+<li>Which MHC class is found on all nucleated cells?</li>
+<li>What does scRNA-seq measure?</li>
+<li>How many cells are in the pbmc3k dataset?</li>
+<li>Approximately how many genes does the average cell in pbmc3k express?</li>
+<li>Why does single-cell data have so many zeros?</li>
+<li>What is CD3D a marker for? What about CD79A?</li>
+</ol>
+<h3 id="coding-skills-checklist">Coding Skills Checklist<a class="headerlink" href="#coding-skills-checklist" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Launch Jupyter Notebook from the <code>immunology</code> conda environment</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Import scanpy, matplotlib, and numpy</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Load the pbmc3k dataset with <code>sc.datasets.pbmc3k()</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Check the number of cells and genes in an AnnData object</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Calculate basic statistics (mean, min, max) on the data</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Create a histogram with matplotlib</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Save a figure to a PNG file</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Extract expression values for a specific gene</li>
+</ul>
+<p>If you checked every box: outstanding work. You now understand the immune system AND can
+write Python code to explore real biological data. That is a combination of skills that
+very few high school students in the world possess.</p>
+<hr />
+<h2 id="11-whats-coming-next">11. What's Coming Next<a class="headerlink" href="#11-whats-coming-next" title="Permanent link">&para;</a></h2>
+<p>In <strong>Week 2: Single-Cell Analysis Pipeline</strong>, you will take the pbmc3k dataset and run a
+full analysis workflow:</p>
+<ul>
+<li><strong>Quality control</strong>: filtering out dead cells and doublets</li>
+<li><strong>Normalization</strong>: making expression values comparable across cells</li>
+<li><strong>Dimensionality reduction</strong>: compressing 32,000 gene dimensions into 2D for
+  visualization (PCA, UMAP)</li>
+<li><strong>Clustering</strong>: grouping similar cells together automatically</li>
+<li><strong>Cell type annotation</strong>: figuring out which cluster is T cells, which is B cells, etc.</li>
+</ul>
+<p>By the end of Week 2, you will produce a UMAP plot -- the iconic visualization of
+single-cell biology -- with colored clusters of different immune cell types. See you there.</p>
+<hr />
+<h2 id="key-papers-optional-reading">Key Papers (Optional Reading)<a class="headerlink" href="#key-papers-optional-reading" title="Permanent link">&para;</a></h2>
+<p>These are landmark papers in the field. You are not expected to read them in full right now,
+but knowing they exist will help you understand the foundations of the technology and data
+we will use throughout this bootcamp.</p>
+<ol>
+<li><strong>Macosko EZ, Basu A, Satija R, et al.</strong> "Highly Parallel Genome-wide Expression
+   Profiling of Individual Cells Using Nanoliter Droplets." <em>Cell</em>, 2015;161(5):1202-1214.
+   DOI: 10.1016/j.cell.2015.05.002</li>
+</ol>
+<p><em>Why it matters:</em> This paper introduced <strong>Drop-seq</strong>, one of the first droplet-based
+   single-cell RNA-seq methods. It demonstrated that thousands of cells could be profiled
+   in a single experiment at low cost. The principles described here underlie the 10x
+   Genomics platform you will use throughout this bootcamp.</p>
+<ol>
+<li><strong>Dominguez Conde C, Xu C, Jarvis LB, et al.</strong> "Cross-tissue immune cell analysis
+   reveals tissue-specific features in humans." <em>Science</em>, 2022;376(6594):eabl5197.
+   DOI: 10.1126/science.abl5197</li>
+</ol>
+<p><em>Why it matters:</em> This paper used single-cell RNA-seq to profile immune cells across
+   multiple human tissues, creating a comprehensive <strong>cross-tissue immune cell atlas</strong>. It
+   showed how immune cells differ depending on where they reside in the body -- a key
+   insight for understanding tissue-specific immunity.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../week_0_setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Week 0 - Setup">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Week 0 - Setup
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../week_2_single_cell_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: Week 2 - Single-Cell RNA-seq">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Week 2 - Single-Cell RNA-seq
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/princello" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1448 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A self-guided introduction to computational modeling in translational immunology">
+      
+      
+        <meta name="author" content="Zicheng Wang">
+      
+      
+      
+        <link rel="prev" href="../final_practice/">
+      
+      
+        <link rel="next" href="../TROUBLESHOOTING/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Glossary - Computational Immunology Bootcamp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#glossary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-header__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computational Immunology Bootcamp
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Glossary
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-nav__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computational Immunology Bootcamp
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_0_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 0 - Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_1_immunology_foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 - Immunology Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_2_single_cell_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 - Single-Cell RNA-seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_3_tcr_bcr_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3 - TCR & BCR Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_4_multi_omics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4 - Multi-omics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../final_practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-biology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Biology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#immunology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immunology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-cell-biology-and-sequencing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Cell Biology and Sequencing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-omics-and-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-omics and Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#machine-learning-and-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Machine Learning and Statistics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programming and Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TROUBLESHOOTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-biology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Biology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#immunology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immunology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-cell-biology-and-sequencing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Cell Biology and Sequencing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-omics-and-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-omics and Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#machine-learning-and-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Machine Learning and Statistics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programming and Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h1>
+<p>A plain-language dictionary of every technical term used in this bootcamp. Terms are grouped by topic and listed alphabetically within each group. If a term is not here, try searching the web or asking an AI assistant.</p>
+<hr />
+<h2 id="general-biology">General Biology<a class="headerlink" href="#general-biology" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Amino acid</strong></td>
+<td>A building block of proteins. There are 20 standard amino acids, each represented by a single letter (e.g., A = Alanine, C = Cysteine). A protein is a chain of amino acids.</td>
+</tr>
+<tr>
+<td><strong>Antigen</strong></td>
+<td>Any molecule that the immune system can recognize and respond to. Often a piece of a virus, bacterium, or abnormal cell. Think of it as the "wanted poster" the immune system is looking for.</td>
+</tr>
+<tr>
+<td><strong>Cell</strong></td>
+<td>The basic unit of life. Your body has about 37 trillion cells, each performing specific jobs.</td>
+</tr>
+<tr>
+<td><strong>Central Dogma</strong></td>
+<td>The flow of genetic information: DNA is copied into RNA, which is used to make Protein. DNA -&gt; RNA -&gt; Protein.</td>
+</tr>
+<tr>
+<td><strong>Chromosome</strong></td>
+<td>A long molecule of DNA packaged tightly. Humans have 23 pairs (46 total).</td>
+</tr>
+<tr>
+<td><strong>DNA</strong></td>
+<td>Deoxyribonucleic acid. The instruction manual for building and running an organism. A long molecule made of 4 "letters" (A, T, G, C).</td>
+</tr>
+<tr>
+<td><strong>Epitope</strong></td>
+<td>The specific part of an antigen that a receptor (TCR or BCR) binds to. Like the specific notch on a key that a lock grips.</td>
+</tr>
+<tr>
+<td><strong>Gene</strong></td>
+<td>A segment of DNA that contains instructions for making a specific protein. Humans have about 20,000 genes.</td>
+</tr>
+<tr>
+<td><strong>Gene expression</strong></td>
+<td>The process of turning a gene "on" to produce RNA and ultimately protein. Different cell types express different genes, which is what makes a skin cell different from a blood cell.</td>
+</tr>
+<tr>
+<td><strong>Genome</strong></td>
+<td>The complete set of DNA in an organism. The human genome has about 3 billion "letters."</td>
+</tr>
+<tr>
+<td><strong>Protein</strong></td>
+<td>A large molecule made of amino acids that performs work in the cell. Enzymes, receptors, antibodies, and structural components are all proteins.</td>
+</tr>
+<tr>
+<td><strong>RNA</strong></td>
+<td>Ribonucleic acid. A temporary copy of a gene's instructions. mRNA (messenger RNA) carries the instructions from DNA to the protein-making machinery.</td>
+</tr>
+<tr>
+<td><strong>Transcription</strong></td>
+<td>The process of copying DNA into RNA.</td>
+</tr>
+<tr>
+<td><strong>Translation</strong></td>
+<td>The process of reading RNA to build a protein.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="immunology">Immunology<a class="headerlink" href="#immunology" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adaptive immunity</strong></td>
+<td>The branch of the immune system that learns and remembers specific threats. Involves T cells and B cells. Takes days to activate but is highly targeted.</td>
+</tr>
+<tr>
+<td><strong>Antibody</strong></td>
+<td>A Y-shaped protein made by B cells that binds to a specific antigen. Also called immunoglobulin (Ig). Each antibody binds one specific target.</td>
+</tr>
+<tr>
+<td><strong>Antigen presentation</strong></td>
+<td>The process by which cells display pieces of proteins on their surface using MHC molecules, allowing T cells to inspect them.</td>
+</tr>
+<tr>
+<td><strong>B cell</strong></td>
+<td>A type of white blood cell that makes antibodies. Born in the Bone marrow. Each B cell produces antibodies with one specific shape.</td>
+</tr>
+<tr>
+<td><strong>BCR (B Cell Receptor)</strong></td>
+<td>The receptor on a B cell's surface. It is essentially a membrane-bound antibody. Made of a heavy chain and a light chain.</td>
+</tr>
+<tr>
+<td><strong>CD4</strong></td>
+<td>A surface protein found on helper T cells. Used as a marker to identify them.</td>
+</tr>
+<tr>
+<td><strong>CD8</strong></td>
+<td>A surface protein found on killer T cells. Used as a marker to identify them.</td>
+</tr>
+<tr>
+<td><strong>CDR3</strong></td>
+<td>Complementarity Determining Region 3. The most variable part of a TCR or BCR, responsible for directly contacting the antigen. It is a short amino acid sequence (typically 10-20 characters) and is the "fingerprint" of each receptor.</td>
+</tr>
+<tr>
+<td><strong>Clonal expansion</strong></td>
+<td>When an immune cell recognizes a threat, it multiplies rapidly to create an army of identical copies. All copies share the same receptor.</td>
+</tr>
+<tr>
+<td><strong>Clonotype</strong></td>
+<td>A group of cells that share the same receptor sequence (same TCR or BCR). They are all descendants of one original cell.</td>
+</tr>
+<tr>
+<td><strong>Cytokine</strong></td>
+<td>Small signaling proteins that immune cells use to communicate with each other. Like text messages between cells.</td>
+</tr>
+<tr>
+<td><strong>Dendritic cell</strong></td>
+<td>A cell that captures invaders, breaks them into pieces, and presents those pieces to T cells. A key "messenger" between innate and adaptive immunity.</td>
+</tr>
+<tr>
+<td><strong>Diversity (repertoire)</strong></td>
+<td>How varied the collection of immune receptors is in a sample. High diversity means many different clonotypes; low diversity means a few clonotypes dominate.</td>
+</tr>
+<tr>
+<td><strong>Helper T cell (CD4+)</strong></td>
+<td>A T cell that coordinates the immune response by releasing cytokines to activate other immune cells. The "commander" of the immune army.</td>
+</tr>
+<tr>
+<td><strong>Innate immunity</strong></td>
+<td>The branch of the immune system you are born with. Provides immediate, general defense (skin, mucus, inflammation). Does not remember specific threats.</td>
+</tr>
+<tr>
+<td><strong>Killer T cell (CD8+)</strong></td>
+<td>A T cell that directly destroys infected or cancerous cells. The "assassin" of the immune system.</td>
+</tr>
+<tr>
+<td><strong>Macrophage</strong></td>
+<td>A large cell that engulfs and digests invaders and dead cells. Also presents antigens to T cells.</td>
+</tr>
+<tr>
+<td><strong>MHC (Major Histocompatibility Complex)</strong></td>
+<td>Proteins on the cell surface that display antigen fragments. MHC class I is on all cells (for CD8 T cells). MHC class II is on special immune cells (for CD4 T cells).</td>
+</tr>
+<tr>
+<td><strong>NK cell (Natural Killer)</strong></td>
+<td>An innate immune cell that kills virus-infected cells and tumor cells without needing prior activation.</td>
+</tr>
+<tr>
+<td><strong>Neutrophil</strong></td>
+<td>The most abundant white blood cell. First responder to infection. Part of innate immunity.</td>
+</tr>
+<tr>
+<td><strong>Repertoire</strong></td>
+<td>The complete collection of all unique TCRs or BCRs in a person or sample.</td>
+</tr>
+<tr>
+<td><strong>T cell</strong></td>
+<td>A type of white blood cell that is central to adaptive immunity. Born in the bone marrow, matures in the Thymus. Main types: helper (CD4+) and killer (CD8+).</td>
+</tr>
+<tr>
+<td><strong>TCR (T Cell Receptor)</strong></td>
+<td>The receptor on a T cell's surface that recognizes antigens presented by MHC molecules. Made of an alpha chain and a beta chain.</td>
+</tr>
+<tr>
+<td><strong>Thymus</strong></td>
+<td>An organ behind the breastbone where T cells mature and are "trained" to recognize foreign antigens but not attack your own body.</td>
+</tr>
+<tr>
+<td><strong>VDJ recombination</strong></td>
+<td>The process by which immune cells shuffle and combine V (Variable), D (Diversity), and J (Joining) gene segments to create unique receptors. This generates the enormous diversity of TCRs and BCRs.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="single-cell-biology-and-sequencing">Single-Cell Biology and Sequencing<a class="headerlink" href="#single-cell-biology-and-sequencing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>10x Genomics</strong></td>
+<td>A company that makes the most widely used single-cell sequencing technology. Uses tiny gel beads in droplets to capture individual cells.</td>
+</tr>
+<tr>
+<td><strong>AnnData</strong></td>
+<td>The data container used by Scanpy (Python). Stores the gene expression matrix plus cell and gene metadata. File extension: <code>.h5ad</code>.</td>
+</tr>
+<tr>
+<td><strong>Barcode</strong></td>
+<td>A short DNA sequence that uniquely labels each cell in a single-cell experiment. Like a name tag for each cell.</td>
+</tr>
+<tr>
+<td><strong>Batch effect</strong></td>
+<td>Technical differences between experiments that are not biological. For example, cells processed on Monday vs. Tuesday might look different due to reagent variability, not biology.</td>
+</tr>
+<tr>
+<td><strong>Bulk RNA-seq</strong></td>
+<td>Measuring gene expression from a mixture of many cells at once. You get an average across all cells, losing information about individual cell differences.</td>
+</tr>
+<tr>
+<td><strong>Cell annotation</strong></td>
+<td>The process of labeling cells with their identity (e.g., "this cluster is CD4 T cells"). Done using marker genes or automated tools.</td>
+</tr>
+<tr>
+<td><strong>CITE-seq</strong></td>
+<td>A technology that measures both RNA and surface proteins from the same cell. Uses antibodies tagged with DNA barcodes.</td>
+</tr>
+<tr>
+<td><strong>Clustering</strong></td>
+<td>Grouping similar cells together based on their gene expression patterns. Like sorting a pile of coins by type.</td>
+</tr>
+<tr>
+<td><strong>Count matrix</strong></td>
+<td>A table where rows are cells, columns are genes, and values are how many RNA molecules of each gene were detected in each cell.</td>
+</tr>
+<tr>
+<td><strong>Dimensionality reduction</strong></td>
+<td>Compressing high-dimensional data (thousands of genes) into fewer dimensions (e.g., 2D for visualization). PCA and UMAP are dimensionality reduction methods.</td>
+</tr>
+<tr>
+<td><strong>Doublet</strong></td>
+<td>When two cells are accidentally captured in the same droplet, creating a mixed profile that looks like a single cell. These are usually filtered out.</td>
+</tr>
+<tr>
+<td><strong>Dropout</strong></td>
+<td>When a gene is actually active in a cell but was not detected due to technical limitations. Common in single-cell data because each cell has very little RNA.</td>
+</tr>
+<tr>
+<td><strong>Feature selection</strong></td>
+<td>Choosing which genes to use for analysis. Typically we select "highly variable genes" -- genes whose expression differs the most between cells.</td>
+</tr>
+<tr>
+<td><strong>Highly variable genes (HVGs)</strong></td>
+<td>Genes that show the most variation across cells. These are the most informative for distinguishing cell types.</td>
+</tr>
+<tr>
+<td><strong>Leiden algorithm</strong></td>
+<td>A method for finding clusters (communities) in a network of cells. Commonly used in single-cell analysis.</td>
+</tr>
+<tr>
+<td><strong>Marker gene</strong></td>
+<td>A gene whose expression is characteristic of a specific cell type. For example, CD3D is a marker for T cells.</td>
+</tr>
+<tr>
+<td><strong>Mitochondrial genes</strong></td>
+<td>Genes encoded in the mitochondria (the cell's energy factories). High percentages of mitochondrial RNA usually indicate dying cells. In human data, these gene names start with "MT-".</td>
+</tr>
+<tr>
+<td><strong>Normalization</strong></td>
+<td>Adjusting raw counts so that cells with different total RNA amounts can be fairly compared. Like converting test scores to percentages.</td>
+</tr>
+<tr>
+<td><strong>PCA (Principal Component Analysis)</strong></td>
+<td>A dimensionality reduction method that finds the main directions of variation in the data. Reduces thousands of genes to ~50 principal components.</td>
+</tr>
+<tr>
+<td><strong>QC (Quality Control)</strong></td>
+<td>Filtering out low-quality cells (too few genes, too much mitochondrial RNA) and low-quality genes (detected in too few cells).</td>
+</tr>
+<tr>
+<td><strong>scATAC-seq</strong></td>
+<td>Single-cell Assay for Transposase-Accessible Chromatin sequencing. Measures which regions of DNA are "open" (accessible) in each cell.</td>
+</tr>
+<tr>
+<td><strong>scRNA-seq</strong></td>
+<td>Single-cell RNA sequencing. Measuring gene expression in individual cells rather than a bulk average.</td>
+</tr>
+<tr>
+<td><strong>Seurat</strong></td>
+<td>A popular R package for single-cell analysis (similar to Scanpy for Python). Developed by the Satija Lab at the New York Genome Center.</td>
+</tr>
+<tr>
+<td><strong>t-SNE</strong></td>
+<td>t-distributed Stochastic Neighbor Embedding. An older dimensionality reduction method for visualization, largely replaced by UMAP.</td>
+</tr>
+<tr>
+<td><strong>UMAP</strong></td>
+<td>Uniform Manifold Approximation and Projection. A method for compressing high-dimensional data into 2D for visualization while preserving the structure. Similar cells appear close together on a UMAP plot.</td>
+</tr>
+<tr>
+<td><strong>UMI (Unique Molecular Identifier)</strong></td>
+<td>A random DNA barcode attached to each RNA molecule before amplification. Allows us to count the actual number of original molecules rather than amplified copies.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="multi-omics-and-integration">Multi-omics and Integration<a class="headerlink" href="#multi-omics-and-integration" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ATAC-seq</strong></td>
+<td>Assay for Transposase-Accessible Chromatin. Measures which parts of the DNA are "open" and potentially active.</td>
+</tr>
+<tr>
+<td><strong>Chromatin</strong></td>
+<td>The complex of DNA wrapped around histone proteins. "Open" chromatin is accessible for gene expression; "closed" chromatin is silenced.</td>
+</tr>
+<tr>
+<td><strong>Chromatin accessibility</strong></td>
+<td>Whether a region of DNA is physically accessible to the cell's machinery. Open = potentially active genes. Closed = silenced genes.</td>
+</tr>
+<tr>
+<td><strong>Co-embedding</strong></td>
+<td>Placing cells from different data types into the same coordinate space so they can be compared visually.</td>
+</tr>
+<tr>
+<td><strong>Gene activity (ATAC)</strong></td>
+<td>An estimate of gene expression derived from ATAC-seq data by looking at chromatin accessibility near each gene.</td>
+</tr>
+<tr>
+<td><strong>Integration</strong></td>
+<td>Combining data from multiple sources or modalities into a unified analysis.</td>
+</tr>
+<tr>
+<td><strong>Label transfer</strong></td>
+<td>Using cell type labels from one dataset (e.g., RNA) to annotate cells in another dataset (e.g., ATAC).</td>
+</tr>
+<tr>
+<td><strong>LSI (Latent Semantic Indexing)</strong></td>
+<td>A dimensionality reduction method used for ATAC-seq data, similar to PCA but designed for binary/sparse data.</td>
+</tr>
+<tr>
+<td><strong>Modality</strong></td>
+<td>A type of measurement. RNA is one modality, protein is another, ATAC is another. Multi-modal means measuring multiple types.</td>
+</tr>
+<tr>
+<td><strong>MuData</strong></td>
+<td>A data container (Python) for storing multi-modal data. Like AnnData but with multiple layers for different modalities.</td>
+</tr>
+<tr>
+<td><strong>Multiome</strong></td>
+<td>A 10x Genomics product that measures both RNA and ATAC from the same cell in the same experiment.</td>
+</tr>
+<tr>
+<td><strong>Peak (ATAC)</strong></td>
+<td>A genomic region with significantly high chromatin accessibility, indicating potential regulatory activity.</td>
+</tr>
+<tr>
+<td><strong>Peak-to-gene link</strong></td>
+<td>A statistical association between an accessible chromatin region (peak) and a gene's expression, suggesting the peak regulates the gene.</td>
+</tr>
+<tr>
+<td><strong>TF (Transcription Factor)</strong></td>
+<td>A protein that binds to specific DNA sequences and controls gene expression. Like a switch that turns genes on or off.</td>
+</tr>
+<tr>
+<td><strong>TF-IDF</strong></td>
+<td>Term Frequency-Inverse Document Frequency. A normalization method used for ATAC-seq data, borrowed from text analysis.</td>
+</tr>
+<tr>
+<td><strong>TF motif</strong></td>
+<td>A short DNA sequence pattern that a transcription factor recognizes and binds to. Finding these motifs in open chromatin reveals which TFs may be active.</td>
+</tr>
+<tr>
+<td><strong>totalVI</strong></td>
+<td>A deep learning model (from scvi-tools) that jointly models RNA and protein data from CITE-seq experiments.</td>
+</tr>
+<tr>
+<td><strong>WNN (Weighted Nearest Neighbors)</strong></td>
+<td>An integration method (from Seurat) that combines multiple modalities by weighting each one differently for each cell.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="machine-learning-and-statistics">Machine Learning and Statistics<a class="headerlink" href="#machine-learning-and-statistics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AUROC (Area Under ROC Curve)</strong></td>
+<td>A metric for classification performance. Ranges from 0.5 (random guessing) to 1.0 (perfect). Measures how well the model distinguishes positives from negatives overall.</td>
+</tr>
+<tr>
+<td><strong>Average Precision (AP)</strong></td>
+<td>A metric that summarizes the precision-recall curve. More informative than AUROC when classes are imbalanced (many more negatives than positives).</td>
+</tr>
+<tr>
+<td><strong>Calibration</strong></td>
+<td>Whether predicted probabilities match actual frequencies. If a model says "80% chance of binding," it should be correct about 80% of the time.</td>
+</tr>
+<tr>
+<td><strong>Classification</strong></td>
+<td>Predicting which category something belongs to (e.g., "binds" vs "does not bind").</td>
+</tr>
+<tr>
+<td><strong>Confusion matrix</strong></td>
+<td>A table showing how many predictions were correct (true positives, true negatives) and incorrect (false positives, false negatives).</td>
+</tr>
+<tr>
+<td><strong>Cross-validation</strong></td>
+<td>Testing a model by repeatedly splitting data into training and test sets, training on one and testing on the other, to get a reliable performance estimate.</td>
+</tr>
+<tr>
+<td><strong>Data leakage</strong></td>
+<td>When information from the test set accidentally leaks into training, making the model appear better than it really is. A major pitfall in TCR prediction.</td>
+</tr>
+<tr>
+<td><strong>Embedding</strong></td>
+<td>A numerical representation of data (like a sequence) in a continuous vector space. Similar items have similar embeddings.</td>
+</tr>
+<tr>
+<td><strong>Feature</strong></td>
+<td>A measurable property used as input to a model. For TCR prediction, features might include amino acid composition, k-mer counts, or biophysical properties.</td>
+</tr>
+<tr>
+<td><strong>Feature engineering</strong></td>
+<td>The process of creating informative features from raw data. Often the most impactful step in building a good model.</td>
+</tr>
+<tr>
+<td><strong>Feature importance</strong></td>
+<td>A score indicating how much each feature contributes to the model's predictions. Helps understand what the model learned.</td>
+</tr>
+<tr>
+<td><strong>K-mer</strong></td>
+<td>A subsequence of length k. For example, the 3-mers of "CASSF" are "CAS", "ASS", "SSF". Used to turn sequences into numerical features.</td>
+</tr>
+<tr>
+<td><strong>Logistic Regression</strong></td>
+<td>A simple classification model that finds a linear boundary between classes. Often a good baseline.</td>
+</tr>
+<tr>
+<td><strong>One-hot encoding</strong></td>
+<td>Representing a categorical variable as a binary vector with a 1 in one position and 0s everywhere else. For amino acids: A=[1,0,0,...], C=[0,1,0,...], etc.</td>
+</tr>
+<tr>
+<td><strong>Overfitting</strong></td>
+<td>When a model memorizes the training data instead of learning general patterns. Performs well on training data but poorly on new data.</td>
+</tr>
+<tr>
+<td><strong>Pipeline</strong></td>
+<td>A sequence of data processing steps chained together. In scikit-learn, pipelines ensure the same transformations are applied consistently.</td>
+</tr>
+<tr>
+<td><strong>Precision</strong></td>
+<td>Of all the items the model predicted as positive, what fraction actually were positive?</td>
+</tr>
+<tr>
+<td><strong>Random Forest</strong></td>
+<td>An ensemble model that builds many decision trees and averages their predictions. Usually more accurate than a single tree.</td>
+</tr>
+<tr>
+<td><strong>Recall</strong></td>
+<td>Of all the actual positives, what fraction did the model correctly identify?</td>
+</tr>
+<tr>
+<td><strong>ROC curve</strong></td>
+<td>Receiver Operating Characteristic curve. Plots true positive rate vs false positive rate at different thresholds.</td>
+</tr>
+<tr>
+<td><strong>SHAP values</strong></td>
+<td>A method for explaining model predictions by showing how much each feature contributed to each prediction.</td>
+</tr>
+<tr>
+<td><strong>Stratified split</strong></td>
+<td>Dividing data into train/test sets while maintaining the same proportion of positive/negative examples in each.</td>
+</tr>
+<tr>
+<td><strong>XGBoost</strong></td>
+<td>A powerful gradient-boosted tree model. Often wins machine learning competitions.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="programming-and-tools">Programming and Tools<a class="headerlink" href="#programming-and-tools" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conda</strong></td>
+<td>A package and environment manager. Installs software and creates isolated environments so different projects don't conflict.</td>
+</tr>
+<tr>
+<td><strong>Environment (conda)</strong></td>
+<td>An isolated workspace with its own installed packages. Different projects can use different environments.</td>
+</tr>
+<tr>
+<td><strong>Git</strong></td>
+<td>A version control system that tracks changes to your code over time. Like "Track Changes" in Word but much more powerful.</td>
+</tr>
+<tr>
+<td><strong>GitHub</strong></td>
+<td>A website for hosting Git repositories. Used to share code, collaborate, and showcase projects.</td>
+</tr>
+<tr>
+<td><strong>Jupyter Notebook</strong></td>
+<td>An interactive coding environment that runs in your web browser. You write code in "cells" and see results immediately. Files end in <code>.ipynb</code>.</td>
+</tr>
+<tr>
+<td><strong>Matplotlib</strong></td>
+<td>A Python library for creating plots and visualizations.</td>
+</tr>
+<tr>
+<td><strong>NumPy</strong></td>
+<td>A Python library for numerical computing. Provides fast array operations.</td>
+</tr>
+<tr>
+<td><strong>Pandas</strong></td>
+<td>A Python library for data manipulation. Provides DataFrames (like spreadsheets in Python).</td>
+</tr>
+<tr>
+<td><strong>pip</strong></td>
+<td>A Python package installer. Like an app store for Python libraries.</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>A programming language widely used in statistics and bioinformatics.</td>
+</tr>
+<tr>
+<td><strong>RStudio</strong></td>
+<td>A user-friendly editor (IDE) for writing R code.</td>
+</tr>
+<tr>
+<td><strong>Scanpy</strong></td>
+<td>A Python package for analyzing single-cell data. The Python equivalent of Seurat.</td>
+</tr>
+<tr>
+<td><strong>scikit-learn</strong></td>
+<td>A Python library for machine learning. Provides models, metrics, and data processing tools.</td>
+</tr>
+<tr>
+<td><strong>Scirpy</strong></td>
+<td>A Python package for analyzing immune receptor (TCR/BCR) data. Works with Scanpy.</td>
+</tr>
+<tr>
+<td><strong>scvi-tools</strong></td>
+<td>A collection of deep learning models for single-cell data analysis. Includes scVI, totalVI, MultiVI, and more.</td>
+</tr>
+<tr>
+<td><strong>Seaborn</strong></td>
+<td>A Python library for statistical data visualization. Built on top of Matplotlib with nicer defaults.</td>
+</tr>
+<tr>
+<td><strong>Terminal</strong></td>
+<td>A text-based interface for interacting with your computer by typing commands. Also called command line, shell, or console.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Cannot find a term? Search the web for "[term] bioinformatics definition" or ask an AI assistant to explain it.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../final_practice/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Final Practice">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Final Practice
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../TROUBLESHOOTING/" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Troubleshooting
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/princello" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

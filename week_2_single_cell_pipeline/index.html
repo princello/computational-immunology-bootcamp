@@ -1,0 +1,2656 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A self-guided introduction to computational modeling in translational immunology">
+      
+      
+        <meta name="author" content="Zicheng Wang">
+      
+      
+      
+        <link rel="prev" href="../week_1_immunology_foundations/">
+      
+      
+        <link rel="next" href="../week_3_tcr_bcr_analysis/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Week 2 - Single-Cell RNA-seq - Computational Immunology Bootcamp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#week-2-single-cell-rna-seq-analysis-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-header__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computational Immunology Bootcamp
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Week 2 - Single-Cell RNA-seq
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-nav__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computational Immunology Bootcamp
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_0_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 0 - Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_1_immunology_foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 - Immunology Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 - Single-Cell RNA-seq
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 - Single-Cell RNA-seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-you-will-build-this-week" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What You Will Build This Week
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-understanding-the-data-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Understanding the Data Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-step-1-quality-control-qc-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Step 1: Quality Control (QC) [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Step 1: Quality Control (QC) [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading the Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-do-we-need-quality-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Do We Need Quality Control?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-qc-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computing QC Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-qc-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualizing QC Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-the-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applying the Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-step-2-normalization-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Step 2: Normalization [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Step 2: Normalization [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-normalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Normalize?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performing-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performing Normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-step-3-feature-selection-highly-variable-genes-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Step 3: Feature Selection (Highly Variable Genes) [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Step 3: Feature Selection (Highly Variable Genes) [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-select-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Select Features?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-highly-variable-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding Highly Variable Genes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-step-4-dimensionality-reduction-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Step 4: Dimensionality Reduction [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Step 4: Dimensionality Reduction [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-dimensionality-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Dimensionality Reduction?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-neighborhood-graph-and-running-umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the Neighborhood Graph and Running UMAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-step-5-clustering-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Step 5: Clustering [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Step 5: Clustering [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Clustering?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-leiden-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Leiden Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-resolution-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Resolution Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-step-6-cell-type-annotation-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Step 6: Cell Type Annotation [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Step 6: Cell Type Annotation [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-clusters-to-cell-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Clusters to Cell Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marker-gene-reference-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Marker Gene Reference Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-marker-gene-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualizing Marker Gene Expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assigning-cell-type-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Cell Type Labels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-step-7-publication-quality-figures-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Step 7: Publication-Quality Figures [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Step 7: Publication-Quality Figures [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#violin-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violin Plots
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heatmap-of-top-marker-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heatmap of Top Marker Genes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-automated-annotation-with-celltypist-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Automated Annotation with CellTypist [CHALLENGE]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Automated Annotation with CellTypist [CHALLENGE]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-celltypist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running CellTypist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparing-with-your-manual-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing with Your Manual Annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-understanding-scvi-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Understanding scVI [DEEP DIVE]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Understanding scVI [DEEP DIVE]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-would-you-use-scvi-instead-of-the-standard-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Would You Use scVI Instead of the Standard Pipeline?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-will-you-use-scvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Will You Use scVI?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-self-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Self-Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Self-Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achievement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achievement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-key-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Key Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-whats-coming-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. What's Coming Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_3_tcr_bcr_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3 - TCR & BCR Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_4_multi_omics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4 - Multi-omics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../final_practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TROUBLESHOOTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-you-will-build-this-week" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What You Will Build This Week
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-understanding-the-data-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Understanding the Data Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-step-1-quality-control-qc-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Step 1: Quality Control (QC) [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Step 1: Quality Control (QC) [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading the Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-do-we-need-quality-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Do We Need Quality Control?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-qc-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computing QC Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-qc-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualizing QC Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-the-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applying the Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-step-2-normalization-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Step 2: Normalization [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Step 2: Normalization [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-normalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Normalize?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performing-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performing Normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-step-3-feature-selection-highly-variable-genes-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Step 3: Feature Selection (Highly Variable Genes) [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Step 3: Feature Selection (Highly Variable Genes) [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-select-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Select Features?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-highly-variable-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding Highly Variable Genes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-step-4-dimensionality-reduction-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Step 4: Dimensionality Reduction [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Step 4: Dimensionality Reduction [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-dimensionality-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Dimensionality Reduction?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-neighborhood-graph-and-running-umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the Neighborhood Graph and Running UMAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-step-5-clustering-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Step 5: Clustering [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Step 5: Clustering [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Clustering?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-leiden-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Leiden Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-resolution-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Resolution Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-step-6-cell-type-annotation-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Step 6: Cell Type Annotation [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Step 6: Cell Type Annotation [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-clusters-to-cell-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Clusters to Cell Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marker-gene-reference-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Marker Gene Reference Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-marker-gene-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualizing Marker Gene Expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assigning-cell-type-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Cell Type Labels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-step-7-publication-quality-figures-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Step 7: Publication-Quality Figures [REQUIRED]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Step 7: Publication-Quality Figures [REQUIRED]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#violin-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violin Plots
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heatmap-of-top-marker-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heatmap of Top Marker Genes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-automated-annotation-with-celltypist-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Automated Annotation with CellTypist [CHALLENGE]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Automated Annotation with CellTypist [CHALLENGE]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-celltypist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running CellTypist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparing-with-your-manual-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing with Your Manual Annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-understanding-scvi-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Understanding scVI [DEEP DIVE]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Understanding scVI [DEEP DIVE]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-would-you-use-scvi-instead-of-the-standard-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Would You Use scVI Instead of the Standard Pipeline?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-will-you-use-scvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Will You Use scVI?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-self-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Self-Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Self-Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achievement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achievement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-key-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Key Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-whats-coming-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. What's Coming Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="week-2-single-cell-rna-seq-analysis-pipeline">Week 2: Single-Cell RNA-seq Analysis Pipeline<a class="headerlink" href="#week-2-single-cell-rna-seq-analysis-pipeline" title="Permanent link">&para;</a></h1>
+<p><strong>Time needed:</strong> 8-10 hours
+<strong>Goal:</strong> Go from raw count data to a publication-quality UMAP showing different immune cell types in human blood.</p>
+<p>Last week you learned about the immune system and loaded your first dataset. This week, you will do what real computational biologists do every day: take messy raw data, clean it up, find structure in it, and identify the immune cell types hiding inside thousands of individual cells. By the end, you will have a labeled map of 2,700 human immune cells -- the exact kind of figure you see in published research papers.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-what-you-will-build-this-week">What You Will Build This Week</a></li>
+<li><a href="#2-understanding-the-data-format">Understanding the Data Format</a></li>
+<li><a href="#3-step-1-quality-control-qc">Step 1: Quality Control (QC)</a> [REQUIRED]</li>
+<li><a href="#4-step-2-normalization">Step 2: Normalization</a> [REQUIRED]</li>
+<li><a href="#5-step-3-feature-selection-highly-variable-genes">Step 3: Feature Selection (Highly Variable Genes)</a> [REQUIRED]</li>
+<li><a href="#6-step-4-dimensionality-reduction">Step 4: Dimensionality Reduction</a> [REQUIRED]</li>
+<li><a href="#7-step-5-clustering">Step 5: Clustering</a> [REQUIRED]</li>
+<li><a href="#8-step-6-cell-type-annotation">Step 6: Cell Type Annotation</a> [REQUIRED]</li>
+<li><a href="#9-step-7-publication-quality-figures">Step 7: Publication-Quality Figures</a> [REQUIRED]</li>
+<li><a href="#10-automated-annotation-with-celltypist">Automated Annotation with CellTypist</a> [CHALLENGE]</li>
+<li><a href="#11-understanding-scvi">Understanding scVI</a> [DEEP DIVE]</li>
+<li><a href="#12-self-check">Self-Check</a></li>
+<li><a href="#13-key-resources">Key Resources</a></li>
+<li><a href="#14-whats-coming-next">What's Coming Next</a></li>
+</ol>
+<hr />
+<h2 id="1-what-you-will-build-this-week">1. What You Will Build This Week<a class="headerlink" href="#1-what-you-will-build-this-week" title="Permanent link">&para;</a></h2>
+<p>By the end of this tutorial, you will have produced a colored UMAP plot -- a two-dimensional map where each dot is one immune cell, and the colors tell you which type of immune cell it is. This is one of the most common figures in single-cell biology papers published in journals like Nature, Cell, and Science.</p>
+<p>Here is the pipeline you will follow, from start to finish:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Raw Data --&gt; QC --&gt; Normalization --&gt; Feature Selection --&gt; Dimensionality Reduction --&gt; Clustering --&gt; Annotation --&gt; Visualization
+</span></code></pre></div>
+<p>Each step builds on the previous one. Here is what each step does in one sentence:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Raw Data</strong></td>
+<td>Load the unprocessed count matrix (how many times each gene was detected in each cell).</td>
+</tr>
+<tr>
+<td><strong>QC (Quality Control)</strong></td>
+<td>Remove low-quality cells and genes that would add noise to the analysis.</td>
+</tr>
+<tr>
+<td><strong>Normalization</strong></td>
+<td>Adjust the data so cells with different total RNA amounts can be fairly compared.</td>
+</tr>
+<tr>
+<td><strong>Feature Selection</strong></td>
+<td>Keep only the ~2,000 most informative genes out of 20,000+ to reduce noise.</td>
+</tr>
+<tr>
+<td><strong>Dimensionality Reduction</strong></td>
+<td>Compress the data from ~2,000 dimensions into 2 dimensions you can visualize.</td>
+</tr>
+<tr>
+<td><strong>Clustering</strong></td>
+<td>Group similar cells together automatically, like sorting coins by denomination.</td>
+</tr>
+<tr>
+<td><strong>Annotation</strong></td>
+<td>Assign biological labels (CD4 T cell, B cell, etc.) to each cluster using known marker genes.</td>
+</tr>
+<tr>
+<td><strong>Visualization</strong></td>
+<td>Create publication-quality plots showing your results.</td>
+</tr>
+</tbody>
+</table>
+<p>Do not worry if this looks like a lot. You will work through each step one at a time, and every piece of code is explained line by line.</p>
+<hr />
+<h2 id="2-understanding-the-data-format">2. Understanding the Data Format<a class="headerlink" href="#2-understanding-the-data-format" title="Permanent link">&para;</a></h2>
+<p>Before you write any code, you need to understand how single-cell data is stored. Scanpy (the Python library you will use) stores everything in an object called <strong>AnnData</strong> (short for "Annotated Data"). Think of it as a smart spreadsheet that holds not just the data, but also information about the cells, the genes, and any analysis results.</p>
+<p>Here are the key parts of an AnnData object:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What It Stores</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>adata.X</code></td>
+<td>The count matrix (cells x genes)</td>
+<td>The actual spreadsheet of numbers</td>
+</tr>
+<tr>
+<td><code>adata.obs</code></td>
+<td>Metadata about each cell (one row per cell)</td>
+<td>A sidebar with notes about each row</td>
+</tr>
+<tr>
+<td><code>adata.var</code></td>
+<td>Metadata about each gene (one row per gene)</td>
+<td>A header with notes about each column</td>
+</tr>
+<tr>
+<td><code>adata.obsm</code></td>
+<td>Embeddings like PCA and UMAP coordinates</td>
+<td>Extra sheets with compressed versions of the data</td>
+</tr>
+<tr>
+<td><code>adata.uns</code></td>
+<td>Unstructured info (colors, settings, etc.)</td>
+<td>A miscellaneous drawer</td>
+</tr>
+</tbody>
+</table>
+<p>Here is how these pieces fit together visually:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>              genes (adata.var)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>              |
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>              v
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    cells --&gt; [  count matrix  ] = adata.X
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    (adata.obs)
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    Example:
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                   Gene_A  Gene_B  Gene_C  ...
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    Cell_001  [     3       0       12     ... ]
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    Cell_002  [     0       7        1     ... ]
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    Cell_003  [     5       2        0     ... ]
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    ...
+</span></code></pre></div>
+<p>Each number in the matrix tells you: "In this cell, this gene was detected this many times." A zero means the gene was not detected in that cell (which is very common -- most of the matrix is zeros, making it "sparse").</p>
+<p>You will see these parts of AnnData referenced throughout the tutorial. Come back to this section if you forget what <code>adata.obs</code> or <code>adata.var</code> means.</p>
+<hr />
+<h2 id="3-step-1-quality-control-qc-required">3. Step 1: Quality Control (QC) [REQUIRED]<a class="headerlink" href="#3-step-1-quality-control-qc-required" title="Permanent link">&para;</a></h2>
+<h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h3>
+<p>Open your terminal, activate your environment, and start Jupyter:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>~/bootcamp
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>jupyter<span class="w"> </span>notebook
+</span></code></pre></div>
+<p>Create a new notebook and name it <code>week2_scrna_pipeline.ipynb</code>. This is where all your code for this week will go.</p>
+<h3 id="loading-the-data">Loading the Data<a class="headerlink" href="#loading-the-data" title="Permanent link">&para;</a></h3>
+<p>In the first cell of your notebook, type and run the following:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Import the libraries we need</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>        <span class="c1"># Main single-cell analysis library</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>         <span class="c1"># Numerical computing (arrays, math)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>  <span class="c1"># Plotting library</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Set scanpy to show progress messages (verbosity=2 means &quot;informative&quot;)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">verbosity</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># Set figure parameters: resolution and background color</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># Load the PBMC 3k dataset (peripheral blood mononuclear cells from a healthy donor)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># This is a famous dataset from 10x Genomics with ~2,700 cells</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">pbmc3k</span><span class="p">()</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># Print a summary of the data</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="nb">print</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> You should see something like:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>AnnData object with n_obs x n_vars = 2700 x 32738
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    var: &#39;gene_ids&#39;, &#39;feature_types&#39;
+</span></code></pre></div>
+<p>This tells you there are 2,700 cells (n_obs) and 32,738 genes (n_vars). That is a matrix with over 88 million entries -- and you are about to analyze it.</p>
+<blockquote>
+<p><strong>Common mistake:</strong> If you see an error about the dataset not being found, make sure you have an internet connection. Scanpy will download it the first time you run this command.</p>
+</blockquote>
+<h3 id="why-do-we-need-quality-control">Why Do We Need Quality Control?<a class="headerlink" href="#why-do-we-need-quality-control" title="Permanent link">&para;</a></h3>
+<p>Not every cell in your data is good. Some cells were damaged during the experiment, some "cells" are actually empty droplets that captured stray RNA, and some are doublets (two cells stuck together). If you include these in your analysis, they will distort your results -- like trying to calculate class averages when some answer sheets are blank or have two students' answers mixed together.</p>
+<p>We check three main things:</p>
+<ol>
+<li>
+<p><strong>Number of genes detected per cell</strong> -- A real cell should express hundreds of genes. If a "cell" has very few genes detected (say, fewer than 200), it is probably an empty droplet. If it has an unusually high number (say, more than 2,500), it might be a doublet.</p>
+</li>
+<li>
+<p><strong>Total counts per cell</strong> -- The total number of RNA molecules detected. Very low total counts suggest a dead or empty cell.</p>
+</li>
+<li>
+<p><strong>Percentage of mitochondrial genes</strong> -- This is the key biological insight. When a cell is dying, its outer membrane breaks open and the contents of the cytoplasm leak out. But mitochondria (the energy factories inside cells) have their own membrane, so their RNA stays behind. A dying cell therefore has a disproportionately high percentage of mitochondrial RNA. In human data, mitochondrial genes start with "MT-".</p>
+</li>
+</ol>
+<h3 id="computing-qc-metrics">Computing QC Metrics<a class="headerlink" href="#computing-qc-metrics" title="Permanent link">&para;</a></h3>
+<p>Add a new cell and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Mark mitochondrial genes</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Human mitochondrial gene names start with &quot;MT-&quot; (e.g., MT-CO1, MT-ND1)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;mt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;MT-&#39;</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Calculate QC metrics and add them to adata.obs</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># qc_vars=[&#39;mt&#39;] tells scanpy to compute mitochondrial percentage</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># percent_top=None skips computing the percentage of counts in top N genes</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># log1p=False means do not log-transform the metrics</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># inplace=True means add the results directly to adata</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">calculate_qc_metrics</span><span class="p">(</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">qc_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mt&#39;</span><span class="p">],</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="n">percent_top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="n">log1p</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="p">)</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1"># Now adata.obs has three new columns:</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1"># n_genes_by_counts = number of genes detected in each cell</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># total_counts = total number of RNA molecules detected in each cell</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># pct_counts_mt = percentage of counts that come from mitochondrial genes</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="nb">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[[</span><span class="s1">&#39;n_genes_by_counts&#39;</span><span class="p">,</span> <span class="s1">&#39;total_counts&#39;</span><span class="p">,</span> <span class="s1">&#39;pct_counts_mt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A table showing count, mean, std, min, 25%, 50%, 75%, and max for each of the three QC metrics. You should see that most cells have a few hundred to a couple thousand genes detected, total counts in the low thousands, and mitochondrial percentages mostly under 5%.</p>
+<h3 id="visualizing-qc-metrics">Visualizing QC Metrics<a class="headerlink" href="#visualizing-qc-metrics" title="Permanent link">&para;</a></h3>
+<p>Before filtering, you should always look at the distributions. This helps you decide where to set your thresholds. Add a new cell and run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Create a figure with three side-by-side histograms</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Plot 1: Distribution of genes detected per cell</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;n_genes_by_counts&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Genes per Cell&#39;</span><span class="p">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Cells&#39;</span><span class="p">)</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Genes Detected per Cell&#39;</span><span class="p">)</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># Red dashed lines mark our filtering thresholds</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Min threshold&#39;</span><span class="p">)</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Max threshold&#39;</span><span class="p">)</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># Plot 2: Distribution of total RNA counts per cell</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;total_counts&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Total Counts&#39;</span><span class="p">)</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Cells&#39;</span><span class="p">)</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total RNA Counts per Cell&#39;</span><span class="p">)</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="c1"># Plot 3: Distribution of mitochondrial gene percentage</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;pct_counts_mt&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;mediumseagreen&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;% Mitochondrial&#39;</span><span class="p">)</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Cells&#39;</span><span class="p">)</span>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mitochondrial Gene %&#39;</span><span class="p">)</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="c1"># Red dashed line marks our filtering threshold</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Threshold&#39;</span><span class="p">)</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="c1"># Adjust spacing so labels do not overlap</span>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="c1"># Save the figure as a PNG file</span>
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;qc_plots.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="c1"># Display the figure in the notebook</span>
+</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> Three histograms side by side. The genes-per-cell plot should show a rough bell shape with a peak around 500-1000. The total counts plot should look similar. The mitochondrial percentage plot should show most cells clustered near 0-5%, with a long tail of cells at higher percentages (those are the dying cells).</p>
+<p>The red dashed lines show where you will cut. Cells outside these thresholds get removed.</p>
+<h3 id="applying-the-filters">Applying the Filters<a class="headerlink" href="#applying-the-filters" title="Permanent link">&para;</a></h3>
+<p>Now apply the filters:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Record how many cells we start with</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cells before filtering: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">n_obs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Filter 1: Remove cells with fewer than 200 genes detected</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># These are likely empty droplets</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">filter_cells</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_genes</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># Filter 2: Remove genes detected in fewer than 3 cells</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># These genes are too rare to be informative</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">filter_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_cells</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># Filter 3: Remove cells with more than 5% mitochondrial counts</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># These are likely dying cells</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">pct_counts_mt</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="c1"># Report how many cells survived</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cells after filtering: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">n_obs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Cells before filtering: 2700
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Cells after filtering: ~2600 (the exact number may vary slightly)
+</span></code></pre></div>
+<p>You should lose around 100 cells. That is normal -- those were the low-quality cells that would have added noise to your analysis.</p>
+<p><strong>Why <code>.copy()</code>?</strong> When you subset an AnnData object with bracket notation (<code>adata[...]</code>), scanpy creates a "view" (a reference to the original data), not an independent copy. Calling <code>.copy()</code> ensures you get a fully independent object, which prevents confusing warnings later.</p>
+<blockquote>
+<p><strong>[CHECKPOINT 1]</strong> You have loaded the raw PBMC 3k data, computed QC metrics, visualized the distributions, and filtered out low-quality cells. You should have a saved file called <code>qc_plots.png</code> and around 2,600 cells remaining. If your cell count after filtering is between 2,400 and 2,700, you are on track.</p>
+</blockquote>
+<hr />
+<h2 id="4-step-2-normalization-required">4. Step 2: Normalization [REQUIRED]<a class="headerlink" href="#4-step-2-normalization-required" title="Permanent link">&para;</a></h2>
+<h3 id="why-normalize">Why Normalize?<a class="headerlink" href="#why-normalize" title="Permanent link">&para;</a></h3>
+<p>Imagine you are comparing two classrooms to see which one likes math more. Classroom A has 30 students and Classroom B has 10 students. If you count total hands raised for "I like math," Classroom A will almost always have more -- not because they like math more, but because there are more students. To compare fairly, you would use percentages instead: "What fraction of students in each classroom raised their hand?"</p>
+<p>The same problem exists in single-cell data. Different cells capture different amounts of total RNA during the experiment. A cell with 10,000 total counts and 100 counts of gene X is not necessarily expressing more of gene X than a cell with 2,000 total counts and 50 counts of gene X. In fact, the second cell has gene X as a higher fraction of its total (50/2000 = 2.5% vs 100/10000 = 1%). Normalization fixes this by putting every cell on the same scale.</p>
+<h3 id="performing-normalization">Performing Normalization<a class="headerlink" href="#performing-normalization" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Normalize each cell so that its total counts sum to 10,000</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># This is like converting raw numbers to &quot;per 10,000&quot; (similar to percentages)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># After this step, gene expression values are comparable across cells</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">target_sum</span><span class="o">=</span><span class="mf">1e4</span><span class="p">)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Log-transform the data: replace each value x with log(x + 1)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># Why? Gene expression data is very skewed -- a few genes have enormous counts</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># while most have small counts. Log-transform compresses the high values and</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># spreads out the low values, making the data easier to analyze</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># The &quot;+1&quot; (that is the &quot;1p&quot; in log1p) prevents log(0), which is undefined</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="c1"># Save the current state as &quot;raw&quot; for later use</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="c1"># Some plotting functions (like dotplot) need access to the normalized-but-not-subset data</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="c1"># Storing it in adata.raw means we can always access the full gene set later</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="n">adata</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">adata</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normalization complete.&quot;</span><span class="p">)</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Normalization complete.
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Data shape: (~2600, ~13000)
+</span></code></pre></div>
+<p>The number of genes is now lower than the original 32,738 because <code>filter_genes(min_cells=3)</code> in the QC step removed very rare genes.</p>
+<blockquote>
+<p><strong>[CHECKPOINT 2]</strong> Your data is now normalized and log-transformed. The values in <code>adata.X</code> are no longer raw counts -- they are normalized log-counts that are comparable across cells.</p>
+</blockquote>
+<hr />
+<h2 id="5-step-3-feature-selection-highly-variable-genes-required">5. Step 3: Feature Selection (Highly Variable Genes) [REQUIRED]<a class="headerlink" href="#5-step-3-feature-selection-highly-variable-genes-required" title="Permanent link">&para;</a></h2>
+<h3 id="why-select-features">Why Select Features?<a class="headerlink" href="#why-select-features" title="Permanent link">&para;</a></h3>
+<p>Your data currently has around 13,000 genes. But most of those genes are expressed at roughly the same level in every cell -- they are "housekeeping" genes that all cells need to survive. These genes tell you nothing about what makes a T cell different from a B cell. They just add noise.</p>
+<p>The genes that matter are the ones that <strong>vary</strong> between cells. A gene that is high in T cells but low in B cells is informative. A gene that is medium in every cell is not. By selecting the ~2,000 most variable genes (called <strong>highly variable genes</strong> or HVGs), you keep the signal and throw away the noise.</p>
+<h3 id="finding-highly-variable-genes">Finding Highly Variable Genes<a class="headerlink" href="#finding-highly-variable-genes" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Identify highly variable genes</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># min_mean=0.0125: ignore genes with very low average expression (too rare)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># max_mean=3: ignore genes with very high average expression (housekeeping)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># min_disp=0.5: keep genes with high dispersion (lots of variation between cells)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">highly_variable_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_mean</span><span class="o">=</span><span class="mf">0.0125</span><span class="p">,</span> <span class="n">max_mean</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">min_disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># How many genes were selected?</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of highly variable genes: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">highly_variable</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># Visualize the selection</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1"># Black dots = selected (highly variable), grey dots = not selected</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">highly_variable_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> You should see that around 1,500-2,000 genes are marked as highly variable. The plot will show a scatter of genes, with the selected ones highlighted. The selected genes have both reasonable mean expression and high dispersion (variation).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Keep only the highly variable genes for downstream analysis</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># We are reducing from ~13,000 genes to ~1,500-2,000</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">highly_variable</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape after filtering: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Data shape after filtering: (~2600, ~1800)
+</span></code></pre></div>
+<p>Your matrix just got much smaller and more informative.</p>
+<blockquote>
+<p><strong>[CHECKPOINT 3]</strong> You have selected the most informative genes. Your data now has around 1,500-2,000 genes instead of 13,000+. The plot of highly variable genes should show a clear separation between selected and non-selected genes.</p>
+</blockquote>
+<hr />
+<h2 id="6-step-4-dimensionality-reduction-required">6. Step 4: Dimensionality Reduction [REQUIRED]<a class="headerlink" href="#6-step-4-dimensionality-reduction-required" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-dimensionality-reduction">What Is Dimensionality Reduction?<a class="headerlink" href="#what-is-dimensionality-reduction" title="Permanent link">&para;</a></h3>
+<p>Even after selecting ~2,000 genes, you cannot visualize 2,000 dimensions on a screen. You need to compress the data into fewer dimensions while preserving the important structure. This happens in two stages:</p>
+<p><strong>Stage 1: PCA (Principal Component Analysis)</strong></p>
+<p>Imagine you have data about students: height, weight, arm length, shoe size, and leg length. These five measurements are not all independent -- tall students tend to also have long arms, big shoes, and long legs. PCA figures out that most of the variation can be explained by just two "directions": something like "overall body size" and "body proportions." These compressed directions are called <strong>principal components (PCs)</strong>.</p>
+<p>In our case, PCA compresses ~2,000 genes into ~50 principal components. Each PC captures a pattern of genes that vary together across cells.</p>
+<p><strong>Stage 2: UMAP (Uniform Manifold Approximation and Projection)</strong></p>
+<p>Fifty dimensions is still too many to visualize. UMAP takes those 50 PCs and squishes them down to 2 dimensions that you can plot on a screen. The key property of UMAP is that it keeps similar cells close together: if two cells have similar gene expression in 50D space, they will be near each other in the 2D UMAP.</p>
+<p>Think of UMAP like making a map. Tokyo and Osaka are close on a map because they are close in real life. New York and Tokyo are far apart on a map because they are far apart in real life. UMAP does the same thing, but the "distance" between cells is measured by gene expression similarity, not geography.</p>
+<blockquote>
+<p><strong>Important caveat:</strong> Distances within a UMAP cluster are meaningful (nearby points are similar), but distances between clusters can be misleading. Two clusters that look far apart on UMAP might actually be quite similar. UMAP preserves local structure well but can distort global structure.</p>
+</blockquote>
+<h3 id="running-pca">Running PCA<a class="headerlink" href="#running-pca" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Scale the data: for each gene, subtract the mean and divide by the standard deviation</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># This ensures that every gene has mean=0 and variance=1</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Without scaling, genes with naturally higher expression would dominate the PCA</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># max_value=10 clips extreme values to prevent outliers from having too much influence</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># Run PCA: compress ~2,000 genes into 50 principal components</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="c1"># svd_solver=&#39;arpack&#39; is an efficient algorithm for computing PCA</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># n_comps=50 means compute 50 principal components</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;arpack&#39;</span><span class="p">,</span> <span class="n">n_comps</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="c1"># Plot the variance explained by each PC (called a &quot;scree plot&quot; or &quot;elbow plot&quot;)</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="c1"># This tells you how much information each PC captures</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">pca_variance_ratio</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_pcs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A plot showing variance explained by each PC. The first few PCs explain the most variance, and the curve drops off sharply (forming an "elbow"). After about 30-40 PCs, additional PCs explain very little. This tells you that 40 PCs capture most of the meaningful variation -- the rest is noise.</p>
+<p><strong>How to read the elbow plot:</strong> Look for where the curve flattens out. The PCs before the "elbow" carry real biological signal. The PCs after the elbow are mostly noise. You do not need to find the exact elbow -- using 30-40 PCs is a safe default for most datasets.</p>
+<h3 id="building-the-neighborhood-graph-and-running-umap">Building the Neighborhood Graph and Running UMAP<a class="headerlink" href="#building-the-neighborhood-graph-and-running-umap" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Build a neighborhood graph</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># This computes which cells are most similar to each other based on their PCA coordinates</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># n_neighbors=10: for each cell, find the 10 most similar cells</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># n_pcs=40: use the first 40 principal components for distance calculations</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_pcs</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Run UMAP: compress the neighborhood graph into 2 dimensions for visualization</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1"># Plot the UMAP -- no colors yet, just showing the structure</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;UMAP of PBMC 3k&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A scatter plot where each dot is one cell. You should see several distinct clusters (groups of dots close together) separated by gaps. These clusters represent different cell types, but we do not know which is which yet -- that comes in the next steps.</p>
+<p>If you see one big blob with no structure, something went wrong in an earlier step. Go back and check your QC filtering and normalization.</p>
+<blockquote>
+<p><strong>Common mistake:</strong> If your UMAP looks very different each time you run it, that is normal. UMAP has randomness built in, so the exact layout changes, but the clusters should always be the same groups of cells. If you want reproducible results, add <code>random_state=42</code> to the <code>sc.tl.umap()</code> call.</p>
+<p><strong>[CHECKPOINT 4]</strong> You should see a UMAP with several distinct clusters of points. The cells have organized themselves into groups based on gene expression similarity. You have gone from ~2,000 dimensions to 2 dimensions while preserving the structure. This is one of the most satisfying moments in single-cell analysis.</p>
+</blockquote>
+<hr />
+<h2 id="7-step-5-clustering-required">7. Step 5: Clustering [REQUIRED]<a class="headerlink" href="#7-step-5-clustering-required" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-clustering">What Is Clustering?<a class="headerlink" href="#what-is-clustering" title="Permanent link">&para;</a></h3>
+<p>Clustering means grouping similar cells together automatically. Imagine you have a pile of coins from different countries: US quarters, Japanese yen, British pounds, and euros. Without knowing anything about the coins, you could still sort them into piles based on size, color, and weight. That is what clustering does with cells -- it groups them based on gene expression patterns, without knowing what the cell types are.</p>
+<h3 id="the-leiden-algorithm">The Leiden Algorithm<a class="headerlink" href="#the-leiden-algorithm" title="Permanent link">&para;</a></h3>
+<p>Scanpy uses the <strong>Leiden algorithm</strong> for clustering. Here is the intuition:</p>
+<ol>
+<li>You already built a neighborhood graph (in the previous step) that connects each cell to its most similar neighbors.</li>
+<li>The Leiden algorithm finds "communities" in this graph -- groups of cells that are densely connected to each other but sparsely connected to cells in other groups.</li>
+<li>It is like finding friend groups in a social network: people within a friend group know each other well, but they have fewer connections to people in other groups.</li>
+</ol>
+<h3 id="the-resolution-parameter">The Resolution Parameter<a class="headerlink" href="#the-resolution-parameter" title="Permanent link">&para;</a></h3>
+<p>The <code>resolution</code> parameter controls how many clusters you get:</p>
+<ul>
+<li><strong>Higher resolution (e.g., 1.0 or 2.0):</strong> More clusters, finer-grained grouping. Like sorting coins by country AND denomination.</li>
+<li><strong>Lower resolution (e.g., 0.3 or 0.5):</strong> Fewer clusters, coarser grouping. Like sorting coins by just metal type (gold, silver, copper).</li>
+</ul>
+<p>There is no single "correct" resolution. It depends on what you want to learn. For the PBMC 3k dataset, <code>resolution=0.5</code> gives a reasonable number of clusters that correspond to major immune cell types.</p>
+<h3 id="running-the-clustering">Running the Clustering<a class="headerlink" href="#running-the-clustering" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Run Leiden clustering</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># resolution=0.5: moderate resolution, good starting point for PBMC data</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1"># flavor=&#39;igraph&#39;: use the igraph implementation (faster for small datasets)</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># n_iterations=2: number of optimization iterations (2 is usually enough)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">leiden</span><span class="p">(</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="n">flavor</span><span class="o">=</span><span class="s1">&#39;igraph&#39;</span><span class="p">,</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="n">n_iterations</span><span class="o">=</span><span class="mi">2</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">)</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="c1"># Plot the UMAP, now colored by cluster assignment</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="c1"># Each cluster gets a different color and a number label</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;leiden&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Clusters (Leiden)&#39;</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s1">&#39;on data&#39;</span><span class="p">)</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="c1"># How many clusters did we get?</span>
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of clusters: </span><span class="si">{</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;leiden&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
+</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="c1"># How many cells are in each cluster?</span>
+</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="nb">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;leiden&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A UMAP plot with each cluster colored differently and labeled with a number (0, 1, 2, ...). You should see roughly 7-9 clusters, depending on random variation. Each cluster corresponds to a group of cells with similar gene expression. The value counts will show you how many cells are in each cluster -- some clusters will be large (hundreds of cells) and others small (tens of cells).</p>
+<blockquote>
+<p><strong>Common mistake:</strong> If you get an error about <code>leidenalg</code> not being installed, run <code>pip install leidenalg</code> in your terminal (with the immunology environment activated) and restart your notebook kernel.</p>
+<p><strong>[CHECKPOINT 5]</strong> Your UMAP should now show colored, numbered clusters. Each cluster is a group of cells that the algorithm thinks are similar to each other. You do not know what these clusters ARE yet (are they T cells? B cells?), but you can see that the algorithm has found structure in the data.</p>
+</blockquote>
+<hr />
+<h2 id="8-step-6-cell-type-annotation-required">8. Step 6: Cell Type Annotation [REQUIRED]<a class="headerlink" href="#8-step-6-cell-type-annotation-required" title="Permanent link">&para;</a></h2>
+<h3 id="from-clusters-to-cell-types">From Clusters to Cell Types<a class="headerlink" href="#from-clusters-to-cell-types" title="Permanent link">&para;</a></h3>
+<p>Clustering tells you WHICH cells group together, but not WHAT they are. That is like sorting your coin pile into groups but not knowing which group is quarters and which is dimes. To identify cell types, you need to look at <strong>marker genes</strong> -- specific genes that are known to be expressed by specific cell types.</p>
+<p>This is where your immunology knowledge from Week 1 comes in. Each immune cell type has a characteristic set of genes that it expresses. By checking which marker genes are active in each cluster, you can figure out what cell type that cluster represents.</p>
+<h3 id="marker-gene-reference-table">Marker Gene Reference Table<a class="headerlink" href="#marker-gene-reference-table" title="Permanent link">&para;</a></h3>
+<p>Here are the marker genes for the major immune cell types you will find in PBMC (peripheral blood mononuclear cells). Save this table -- you will refer to it repeatedly.</p>
+<table>
+<thead>
+<tr>
+<th>Cell Type</th>
+<th>Key Markers</th>
+<th>What to Look For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CD4 T cells</td>
+<td>IL7R, CD4</td>
+<td>IL7R is the most reliable; CD4 is also expressed by monocytes at low levels</td>
+</tr>
+<tr>
+<td>CD8 T cells</td>
+<td>CD8A, CD8B</td>
+<td>Both should be high; distinguish from NK cells by lack of GNLY</td>
+</tr>
+<tr>
+<td>B cells</td>
+<td>MS4A1 (CD20), CD79A</td>
+<td>MS4A1 is the classic B cell marker</td>
+</tr>
+<tr>
+<td>NK cells</td>
+<td>GNLY, NKG7</td>
+<td>Natural killer cells; high cytotoxic gene expression</td>
+</tr>
+<tr>
+<td>CD14+ Monocytes</td>
+<td>CD14, LYZ</td>
+<td>The most common monocyte subtype in blood</td>
+</tr>
+<tr>
+<td>FCGR3A+ Monocytes</td>
+<td>FCGR3A, MS4A7</td>
+<td>Also called CD16+ monocytes; a less common subtype</td>
+</tr>
+<tr>
+<td>Dendritic cells</td>
+<td>FCER1A, CST3</td>
+<td>Antigen-presenting cells; relatively rare in blood</td>
+</tr>
+<tr>
+<td>Platelets</td>
+<td>PPBP</td>
+<td>Megakaryocyte-derived cell fragments; very small cluster</td>
+</tr>
+</tbody>
+</table>
+<h3 id="visualizing-marker-gene-expression">Visualizing Marker Gene Expression<a class="headerlink" href="#visualizing-marker-gene-expression" title="Permanent link">&para;</a></h3>
+<p>The <strong>dot plot</strong> is one of the most informative ways to check which markers are active in which cluster. The size of each dot shows what fraction of cells in that cluster express the gene, and the color shows the average expression level.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Define the marker genes we want to check</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">marker_genes</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="s1">&#39;IL7R&#39;</span><span class="p">,</span>    <span class="c1"># CD4 T cells</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="s1">&#39;CD8A&#39;</span><span class="p">,</span>    <span class="c1"># CD8 T cells</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="s1">&#39;MS4A1&#39;</span><span class="p">,</span>   <span class="c1"># B cells (also known as CD20)</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    <span class="s1">&#39;CD79A&#39;</span><span class="p">,</span>   <span class="c1"># B cells</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="s1">&#39;GNLY&#39;</span><span class="p">,</span>    <span class="c1"># NK cells</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="s1">&#39;NKG7&#39;</span><span class="p">,</span>    <span class="c1"># NK cells</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    <span class="s1">&#39;CD14&#39;</span><span class="p">,</span>    <span class="c1"># CD14+ Monocytes</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    <span class="s1">&#39;LYZ&#39;</span><span class="p">,</span>     <span class="c1"># CD14+ Monocytes (lysozyme)</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    <span class="s1">&#39;FCGR3A&#39;</span><span class="p">,</span>  <span class="c1"># FCGR3A+ Monocytes (also known as CD16)</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>    <span class="s1">&#39;MS4A7&#39;</span><span class="p">,</span>   <span class="c1"># FCGR3A+ Monocytes</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    <span class="s1">&#39;FCER1A&#39;</span><span class="p">,</span>  <span class="c1"># Dendritic cells</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    <span class="s1">&#39;CST3&#39;</span><span class="p">,</span>    <span class="c1"># Dendritic cells</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>    <span class="s1">&#39;PPBP&#39;</span>     <span class="c1"># Platelets</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="p">]</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="c1"># Dot plot: rows are clusters, columns are marker genes</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="c1"># Dot size = fraction of cells expressing the gene</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="c1"># Dot color = average expression level</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">marker_genes</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;leiden&#39;</span><span class="p">,</span> <span class="n">standard_scale</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A grid of dots. For each cluster (row), you should see large, dark dots for the marker genes of that cluster's cell type, and small or absent dots for other markers. For example, the cluster that is B cells should have large dark dots at MS4A1 and CD79A, but small/light dots at CD14 and CD8A.</p>
+<p>Now look at the markers directly on the UMAP to see where each marker is expressed spatially:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Feature plots: overlay gene expression on the UMAP</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># Yellow/bright = high expression, dark/purple = low expression</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CD14&#39;</span><span class="p">,</span> <span class="s1">&#39;MS4A1&#39;</span><span class="p">,</span> <span class="s1">&#39;CD8A&#39;</span><span class="p">,</span> <span class="s1">&#39;IL7R&#39;</span><span class="p">,</span> <span class="s1">&#39;GNLY&#39;</span><span class="p">,</span> <span class="s1">&#39;FCER1A&#39;</span><span class="p">],</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>       <span class="c1"># Arrange plots in 3 columns</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span>  <span class="c1"># Color map: purple (low) to yellow (high)</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> Six UMAP plots, each colored by the expression of one gene. You should see that each gene "lights up" a different part of the UMAP:
+- CD14 should light up one or two clusters (monocytes)
+- MS4A1 should light up a different cluster (B cells)
+- CD8A should light up another cluster (CD8 T cells)
+- IL7R should light up the largest cluster(s) (CD4 T cells)
+- GNLY should light up a cluster near the T cells (NK cells)
+- FCER1A should light up a small cluster (dendritic cells)</p>
+<h3 id="assigning-cell-type-labels">Assigning Cell Type Labels<a class="headerlink" href="#assigning-cell-type-labels" title="Permanent link">&para;</a></h3>
+<p>Now comes the part where YOU make a scientific judgment. Look at your dot plot and feature plots, and decide which cluster corresponds to which cell type. Here is the process:</p>
+<ol>
+<li>Look at each cluster number in the dot plot</li>
+<li>See which marker genes have the biggest dots in that cluster</li>
+<li>Match those markers to the table above</li>
+<li>Assign the cell type label</li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Based on marker gene expression, assign cell type labels to each cluster</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1"># IMPORTANT: Look at YOUR dot plot and feature plots to decide!</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1"># The cluster numbers below are an example -- your numbers may differ</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># because clustering has some randomness</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="n">cluster_to_celltype</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;CD4 T cells&#39;</span><span class="p">,</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;CD14 Monocytes&#39;</span><span class="p">,</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;CD4 T cells&#39;</span><span class="p">,</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;B cells&#39;</span><span class="p">,</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="s1">&#39;CD8 T cells&#39;</span><span class="p">,</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="s1">&#39;NK cells&#39;</span><span class="p">,</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>    <span class="s1">&#39;6&#39;</span><span class="p">:</span> <span class="s1">&#39;FCGR3A Monocytes&#39;</span><span class="p">,</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    <span class="s1">&#39;7&#39;</span><span class="p">:</span> <span class="s1">&#39;Dendritic cells&#39;</span><span class="p">,</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="p">}</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="c1"># TIP: Your cluster numbers will very likely not match these exactly!</span>
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="c1"># You MUST look at your own dot plot and adjust the mapping above.</span>
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="c1"># For example, if YOUR cluster 0 has high MS4A1 and CD79A,</span>
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="c1"># then change &#39;0&#39; to &#39;B cells&#39; in the dictionary above.</span>
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="c1">#</span>
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="c1"># If you have more clusters than listed here (e.g., cluster 8),</span>
+</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="c1"># check its markers and add it to the dictionary.</span>
+</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="c1"># If a cluster does not match any known type well,</span>
+</span><span id="__span-19-25"><a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="c1"># you can label it &#39;Unknown&#39; for now.</span>
+</span><span id="__span-19-26"><a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>
+</span><span id="__span-19-27"><a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="c1"># Apply the mapping: create a new column &#39;cell_type&#39; in adata.obs</span>
+</span><span id="__span-19-28"><a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;leiden&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cluster_to_celltype</span><span class="p">)</span>
+</span><span id="__span-19-29"><a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>
+</span><span id="__span-19-30"><a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="c1"># Check if any cells were not assigned (NaN means a cluster was missing from your dictionary)</span>
+</span><span id="__span-19-31"><a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="n">unassigned</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span><span id="__span-19-32"><a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="k">if</span> <span class="n">unassigned</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-19-33"><a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: </span><span class="si">{</span><span class="n">unassigned</span><span class="si">}</span><span class="s2"> cells have no assigned cell type.&quot;</span><span class="p">)</span>
+</span><span id="__span-19-34"><a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check if all cluster numbers are in your cluster_to_celltype dictionary.&quot;</span><span class="p">)</span>
+</span><span id="__span-19-35"><a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a>    <span class="c1"># Fill any missing with &#39;Unknown&#39;</span>
+</span><span id="__span-19-36"><a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>    <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+</span><span id="__span-19-37"><a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a>
+</span><span id="__span-19-38"><a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a><span class="c1"># Plot the final annotated UMAP</span>
+</span><span id="__span-19-39"><a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span>
+</span><span id="__span-19-40"><a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-19-41"><a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a>    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span>
+</span><span id="__span-19-42"><a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Cell Types in PBMC 3k&#39;</span><span class="p">,</span>
+</span><span id="__span-19-43"><a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a>    <span class="n">legend_loc</span><span class="o">=</span><span class="s1">&#39;on data&#39;</span><span class="p">,</span>      <span class="c1"># Put labels directly on the clusters</span>
+</span><span id="__span-19-44"><a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a>    <span class="n">legend_fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>         <span class="c1"># Keep the labels readable but not too large</span>
+</span><span id="__span-19-45"><a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a>    <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span>              <span class="c1"># Remove the box around the plot for a cleaner look</span>
+</span><span id="__span-19-46"><a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a><span class="p">)</span>
+</span><span id="__span-19-47"><a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a>
+</span><span id="__span-19-48"><a id="__codelineno-19-48" name="__codelineno-19-48" href="#__codelineno-19-48"></a><span class="c1"># Save this figure -- it is your main result for this week</span>
+</span><span id="__span-19-49"><a id="__codelineno-19-49" name="__codelineno-19-49" href="#__codelineno-19-49"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;pbmc3k_celltype_umap.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</span><span id="__span-19-50"><a id="__codelineno-19-50" name="__codelineno-19-50" href="#__codelineno-19-50"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A beautiful UMAP plot where each cluster is labeled with an immune cell type name. You should see:
+- One or two large clusters of CD4 T cells (the most common immune cell in blood)
+- A cluster of CD14 Monocytes
+- A cluster of B cells
+- A cluster of CD8 T cells
+- A cluster of NK cells
+- Smaller clusters for FCGR3A Monocytes, Dendritic cells, and possibly Platelets</p>
+<p>If a cluster does not clearly match any cell type, it is okay to label it "Unknown" and come back to it later. Real researchers face this situation regularly.</p>
+<blockquote>
+<p><strong>[CHECKPOINT 6]</strong> You just identified immune cell types from real human blood data. You took 2,700 unlabeled cells, filtered them, normalized them, found structure in the data, clustered them, and identified what kind of immune cell each one is -- using nothing but gene expression patterns and your knowledge of marker genes. This is exactly what researchers do in published papers. Your saved file <code>pbmc3k_celltype_umap.png</code> is a publication-style figure.</p>
+</blockquote>
+<hr />
+<h2 id="9-step-7-publication-quality-figures-required">9. Step 7: Publication-Quality Figures [REQUIRED]<a class="headerlink" href="#9-step-7-publication-quality-figures-required" title="Permanent link">&para;</a></h2>
+<p>A single UMAP is a good start, but research papers typically include multiple complementary visualizations. In this section, you will create violin plots and a heatmap to strengthen your results.</p>
+<h3 id="violin-plots">Violin Plots<a class="headerlink" href="#violin-plots" title="Permanent link">&para;</a></h3>
+<p>Violin plots show the distribution of gene expression for each cell type. They are useful for showing that your marker genes are genuinely specific to the expected cell types.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Violin plots of key marker genes, grouped by cell type</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="c1"># Each &quot;violin&quot; shows the distribution of expression values for that gene in that cell type</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">violin</span><span class="p">(</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="p">[</span><span class="s1">&#39;CD14&#39;</span><span class="p">,</span> <span class="s1">&#39;LYZ&#39;</span><span class="p">,</span> <span class="s1">&#39;MS4A1&#39;</span><span class="p">,</span> <span class="s1">&#39;CD79A&#39;</span><span class="p">,</span> <span class="s1">&#39;CD8A&#39;</span><span class="p">,</span> <span class="s1">&#39;IL7R&#39;</span><span class="p">,</span> <span class="s1">&#39;GNLY&#39;</span><span class="p">],</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>    <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span>  <span class="c1"># Rotate x-axis labels so they do not overlap</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A panel of violin plots. For each gene, you should see that one or two cell types have high expression (a tall, wide violin shape) while the others have low expression (a flat line near zero). For example, CD14 and LYZ should be high in CD14 Monocytes and low in everything else. MS4A1 and CD79A should be high in B cells only.</p>
+<h3 id="heatmap-of-top-marker-genes">Heatmap of Top Marker Genes<a class="headerlink" href="#heatmap-of-top-marker-genes" title="Permanent link">&para;</a></h3>
+<p>The heatmap shows the top differentially expressed genes for each cell type. Scanpy can automatically find these genes using a statistical test.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Find the top marker genes for each cell type using the Wilcoxon rank-sum test</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="c1"># This test asks: &quot;Is this gene significantly more expressed in this cell type</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1"># compared to all other cell types?&quot;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;wilcoxon&#39;</span><span class="p">)</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="c1"># Plot a heatmap of the top 5 genes per cell type</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="c1"># Each row is a gene, each column is a cell (grouped by cell type)</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c1"># Yellow = high expression, purple = low expression</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">rank_genes_groups_heatmap</span><span class="p">(</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="n">n_genes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>                <span class="c1"># Show the top 5 genes per cell type</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>    <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>    <span class="n">show_gene_labels</span><span class="o">=</span><span class="kc">True</span>     <span class="c1"># Display gene names on the plot</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A heatmap with clear blocks of yellow along the diagonal. Each cell type should have a set of 5 genes that are bright yellow (highly expressed) in that cell type but dark purple (low expression) in all others. This confirms that your cell type assignments are biologically meaningful.</p>
+<blockquote>
+<p><strong>Tip:</strong> If the gene labels are hard to read, try adding <code>figsize=(12, 8)</code> or adjusting <code>show_gene_labels=True</code> in the plot call. You can also view the top genes as a table:</p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Print the top 5 marker genes for each cell type (as a table)</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;rank_genes_groups&#39;</span><span class="p">]</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">groups</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">top_genes</span> <span class="o">=</span> <span class="p">{</span><span class="n">group</span><span class="p">:</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">}</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="k">for</span> <span class="n">cell_type</span><span class="p">,</span> <span class="n">genes</span> <span class="ow">in</span> <span class="n">top_genes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cell_type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">genes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A list showing the top 5 marker genes for each cell type. You should recognize some of them from the marker gene table earlier. You may also discover new markers you did not know about -- this is how researchers identify novel marker genes.</p>
+<blockquote>
+<p><strong>[CHECKPOINT 7]</strong> You now have multiple visualizations supporting your cell type annotations: a labeled UMAP, violin plots, and a heatmap. These are the core figures you would include in a research paper's supplementary materials or main figures.</p>
+</blockquote>
+<hr />
+<h2 id="10-automated-annotation-with-celltypist-challenge">10. Automated Annotation with CellTypist [CHALLENGE]<a class="headerlink" href="#10-automated-annotation-with-celltypist-challenge" title="Permanent link">&para;</a></h2>
+<p>Manual annotation (looking at marker genes and deciding cell types yourself) is the gold standard, but it requires expertise and is time-consuming. <strong>CellTypist</strong> is a tool that automates this process using a pre-trained machine learning model. It has been trained on millions of cells with known labels and can predict cell types automatically.</p>
+<p>This section is optional. If you are short on time, skip to the Self-Check.</p>
+<h3 id="running-celltypist">Running CellTypist<a class="headerlink" href="#running-celltypist" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">celltypist</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">celltypist</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># Download a pre-trained model</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1"># &#39;Immune_All_Low.pkl&#39; is trained on immune cells at a low (broad) resolution</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="c1"># It can identify major immune cell types like T cells, B cells, monocytes, etc.</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="n">models</span><span class="o">.</span><span class="n">download_models</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;Immune_All_Low.pkl&#39;</span><span class="p">)</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="c1"># Run cell type prediction</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="c1"># majority_voting=True uses a smoothing step: if most cells in a neighborhood</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="c1"># are predicted as one type, isolated differently-labeled cells get corrected</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="c1"># This reduces noisy predictions</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="n">predictions</span> <span class="o">=</span> <span class="n">celltypist</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>    <span class="n">adata</span><span class="p">,</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;Immune_All_Low.pkl&#39;</span><span class="p">,</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>    <span class="n">majority_voting</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="p">)</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="c1"># Convert predictions to an AnnData object with the labels added</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="n">adata_ct</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">to_adata</span><span class="p">()</span>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="c1"># Plot the CellTypist predictions on the UMAP</span>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span>
+</span><span id="__span-23-24"><a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a>    <span class="n">adata_ct</span><span class="p">,</span>
+</span><span id="__span-23-25"><a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a>    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;majority_voting&#39;</span><span class="p">,</span>
+</span><span id="__span-23-26"><a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;CellTypist Predictions&#39;</span><span class="p">,</span>
+</span><span id="__span-23-27"><a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a>    <span class="n">legend_fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+</span><span id="__span-23-28"><a id="__codelineno-23-28" name="__codelineno-23-28" href="#__codelineno-23-28"></a>    <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-23-29"><a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Expected output:</strong> A UMAP colored by CellTypist's predicted cell types. The labels will be more granular than your manual annotations -- for example, CellTypist might distinguish "Classical monocytes" from "Non-classical monocytes" or "Naive CD4 T cells" from "Memory CD4 T cells."</p>
+<h3 id="comparing-with-your-manual-annotation">Comparing with Your Manual Annotation<a class="headerlink" href="#comparing-with-your-manual-annotation" title="Permanent link">&para;</a></h3>
+<p>Take a moment to compare the CellTypist predictions with your manual annotations. Do they agree on the major cell types? Where do they differ? CellTypist might identify subtypes that you grouped together (e.g., it might split your "CD4 T cells" into naive and memory subsets).</p>
+<p>Neither approach is "right" or "wrong" -- they serve different purposes. Manual annotation gives you full control and understanding, while automated annotation is faster and can catch subtypes you might miss.</p>
+<blockquote>
+<p><strong>[CHECKPOINT 8 -- CHALLENGE]</strong> You have run an automated cell type prediction tool and compared its results with your manual analysis. If you completed this section, you now understand both manual and automated approaches to cell type annotation.</p>
+</blockquote>
+<hr />
+<h2 id="11-understanding-scvi-deep-dive">11. Understanding scVI [DEEP DIVE]<a class="headerlink" href="#11-understanding-scvi-deep-dive" title="Permanent link">&para;</a></h2>
+<p>This section is purely informational. You do not need to run any code.</p>
+<p><strong>scVI</strong> (single-cell Variational Inference) is a deep learning framework for single-cell data analysis, developed by the Yosef Lab at UC Berkeley. It uses a type of neural network called a <strong>variational autoencoder</strong> (VAE) to learn a compressed representation of single-cell data.</p>
+<h3 id="why-would-you-use-scvi-instead-of-the-standard-pipeline">Why Would You Use scVI Instead of the Standard Pipeline?<a class="headerlink" href="#why-would-you-use-scvi-instead-of-the-standard-pipeline" title="Permanent link">&para;</a></h3>
+<p>The pipeline you ran today (normalize, select HVGs, PCA, UMAP) works great for many datasets. But it has limitations:</p>
+<ul>
+<li><strong>Batch effects:</strong> If you combine data from multiple experiments, technical differences between experiments can overshadow biological differences. scVI can correct for these batch effects during the analysis.</li>
+<li><strong>Count data modeling:</strong> The standard pipeline log-transforms the data, which is a rough approximation. scVI directly models the count data using a negative binomial distribution, which is a better statistical fit.</li>
+<li><strong>Uncertainty:</strong> scVI can tell you how confident it is in its results, which the standard pipeline cannot.</li>
+<li><strong>Scalability:</strong> scVI handles millions of cells efficiently because neural networks are good at processing large datasets in batches.</li>
+</ul>
+<h3 id="when-will-you-use-scvi">When Will You Use scVI?<a class="headerlink" href="#when-will-you-use-scvi" title="Permanent link">&para;</a></h3>
+<p>In later weeks and in real research projects, you may encounter datasets with multiple batches or very large cell counts. That is when scVI becomes essential. For now, the standard pipeline you learned today is perfectly appropriate.</p>
+<p>If you are curious, the scvi-tools documentation is excellent: <a href="https://scvi-tools.org/">https://scvi-tools.org/</a></p>
+<hr />
+<h2 id="12-self-check">12. Self-Check<a class="headerlink" href="#12-self-check" title="Permanent link">&para;</a></h2>
+<h3 id="review-questions">Review Questions<a class="headerlink" href="#review-questions" title="Permanent link">&para;</a></h3>
+<p>Answer these questions to make sure you understand what you did. Try to answer from memory before looking back at the tutorial.</p>
+<ol>
+<li><strong>What does QC stand for, and why do we do it?</strong></li>
+</ol>
+<p>QC stands for Quality Control. We do it to remove low-quality cells (empty droplets, dying cells, doublets) that would add noise and distort our analysis.</p>
+<ol>
+<li><strong>Why do we filter out cells with high mitochondrial gene percentage?</strong></li>
+</ol>
+<p>Dying cells have damaged outer membranes, so their cytoplasmic RNA leaks out. Mitochondrial RNA stays behind because mitochondria have their own membrane. A high mitochondrial percentage is therefore a signature of cell death.</p>
+<ol>
+<li><strong>What is the purpose of normalization?</strong></li>
+</ol>
+<p>Different cells capture different amounts of total RNA during the experiment. Normalization puts all cells on the same scale so that gene expression levels are comparable across cells.</p>
+<ol>
+<li><strong>What does UMAP show you?</strong></li>
+</ol>
+<p>UMAP is a 2D visualization where each dot is one cell. Cells that are close together on the UMAP have similar gene expression profiles. It lets you see the structure in your data at a glance.</p>
+<ol>
+<li><strong>How many cell types did you identify?</strong></li>
+</ol>
+<p>You should have identified 7-8 major cell types: CD4 T cells, CD8 T cells, B cells, NK cells, CD14 Monocytes, FCGR3A Monocytes, Dendritic cells, and possibly Platelets.</p>
+<ol>
+<li><strong>Can you name 3 marker genes and the cell types they mark?</strong></li>
+</ol>
+<p>Examples: IL7R marks CD4 T cells, MS4A1 (CD20) marks B cells, CD14 marks CD14+ Monocytes, GNLY marks NK cells, CD8A marks CD8 T cells.</p>
+<h3 id="output-verification">Output Verification<a class="headerlink" href="#output-verification" title="Permanent link">&para;</a></h3>
+<p>Check that you have produced these files:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>qc_plots.png</code> -- Three histograms showing the distributions of genes per cell, total counts, and mitochondrial percentage</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>pbmc3k_celltype_umap.png</code> -- A UMAP colored by cell type labels</li>
+</ul>
+<h3 id="achievement">Achievement<a class="headerlink" href="#achievement" title="Permanent link">&para;</a></h3>
+<p>You just analyzed 2,700 human immune cells and identified their types -- this is exactly what researchers do in real published papers. The pipeline you learned today (QC, normalization, feature selection, dimensionality reduction, clustering, annotation) is the foundation of virtually every single-cell RNA-seq study. Whether the paper is in Nature, Cell, or Science, it almost certainly includes this pipeline or a close variant.</p>
+<p>You should feel confident about what you accomplished. This is real computational biology.</p>
+<hr />
+<h2 id="13-key-resources">13. Key Resources<a class="headerlink" href="#13-key-resources" title="Permanent link">&para;</a></h2>
+<p>These resources can help you go deeper or troubleshoot issues:</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>What It Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.sc-best-practices.org/">Single-cell best practices (Chapters 1-21)</a></td>
+<td>Comprehensive guide to scRNA-seq analysis with best practices and pitfalls</td>
+</tr>
+<tr>
+<td><a href="https://scanpy-tutorials.readthedocs.io/">Scanpy tutorials</a></td>
+<td>Official Scanpy tutorials, including the PBMC 3k walkthrough</td>
+</tr>
+<tr>
+<td><a href="https://www.celltypist.org/">CellTypist</a></td>
+<td>Automated cell type annotation tool and documentation</td>
+</tr>
+<tr>
+<td><a href="https://www.kaggle.com/">Kaggle</a></td>
+<td>Practice datasets and competitions for data science skills</td>
+</tr>
+<tr>
+<td><a href="https://scikit-learn.org/">scikit-learn documentation</a></td>
+<td>Machine learning library documentation (useful for understanding PCA, clustering concepts)</td>
+</tr>
+<tr>
+<td><a href="https://scvi-tools.org/">scvi-tools</a></td>
+<td>Deep learning framework for single-cell analysis</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-whats-coming-next">14. What's Coming Next<a class="headerlink" href="#14-whats-coming-next" title="Permanent link">&para;</a></h2>
+<p>In <strong>Week 3: TCR and BCR Analysis</strong>, you will explore the other side of single-cell immune data: the receptors. Every T cell and B cell carries a unique receptor (TCR or BCR) that determines which pathogens it can recognize. By combining gene expression data (what you learned this week) with receptor sequence data, you can ask powerful questions like:</p>
+<ul>
+<li>Which T cells are expanding in response to an infection? (Clonal expansion)</li>
+<li>Do T cells that recognize the same antigen also have similar gene expression?</li>
+<li>How diverse is the immune repertoire in a patient?</li>
+</ul>
+<p>You will use <strong>scirpy</strong> (a companion library to scanpy, specifically for immune receptor data) to analyze TCR and BCR sequences from single-cell experiments.</p>
+<p>Everything you learned this week -- AnnData objects, UMAP, clustering, cell type annotation -- will carry over directly. Week 3 builds on top of this foundation.</p>
+<hr />
+<p><em>You have finished Week 2. Take a break, then come back for Week 3 when you are ready.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../week_1_immunology_foundations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Week 1 - Immunology Foundations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Week 1 - Immunology Foundations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../week_3_tcr_bcr_analysis/" class="md-footer__link md-footer__link--next" aria-label="Next: Week 3 - TCR &amp; BCR Analysis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Week 3 - TCR & BCR Analysis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/princello" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2198 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A self-guided introduction to computational modeling in translational immunology">
+      
+      
+        <meta name="author" content="Zicheng Wang">
+      
+      
+      
+        <link rel="prev" href="../GLOSSARY/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Troubleshooting - Computational Immunology Bootcamp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#troubleshooting-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-header__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computational Immunology Bootcamp
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Computational Immunology Bootcamp" class="md-nav__button md-logo" aria-label="Computational Immunology Bootcamp" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computational Immunology Bootcamp
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_0_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 0 - Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_1_immunology_foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1 - Immunology Foundations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_2_single_cell_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2 - Single-Cell RNA-seq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_3_tcr_bcr_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3 - TCR & BCR Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week_4_multi_omics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4 - Multi-omics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../final_practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLOSSARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conda-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "conda: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pip-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "pip: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-installation-hangs-or-is-very-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Package installation hangs or is very slow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-could-not-build-wheels-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ERROR: Could not build wheels for ..."
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conda-and-environment-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conda and Environment Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conda and Environment Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-instead-of-immunology-in-my-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "(base)" instead of "(immunology)" in my prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environmentnotwritableerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "EnvironmentNotWritableError"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packagesnotfounderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "PackagesNotFoundError"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-installed-a-package-but-python-cannot-find-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I installed a package but Python cannot find it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyter-notebook-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jupyter Notebook Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jupyter Notebook Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-does-not-open-in-my-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jupyter does not open in my browser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernel-not-found-or-wrong-python-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Kernel not found" or wrong Python version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notebook-is-not-saving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebook is not saving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-runs-forever-spinning-asterisk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell runs forever (spinning asterisk [*])
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Errors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulenotfounderror-no-module-named-xyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ModuleNotFoundError: No module named 'xyz'"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntaxerror-invalid-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "SyntaxError: invalid syntax"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indentationerror-unexpected-indent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "IndentationError: unexpected indent"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nameerror-name-xyz-is-not-defined" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "NameError: name 'xyz' is not defined"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typeerror-xyz-object-is-not-subscriptable-or-similar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "TypeError: 'xyz' object is not subscriptable" or similar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanpy-and-single-cell-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanpy and Single-Cell Errors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scanpy and Single-Cell Errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adatax-is-none-or-empty-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "adata.X is None" or empty results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valueerror-could-not-convert-string-to-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ValueError: could not convert string to float"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#umapclustering-looks-wrong-one-giant-blob-or-everything-scattered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UMAP/clustering looks wrong (one giant blob or everything scattered)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importerror-leidenalg-is-not-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ImportError: leidenalg is not installed"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanpy-plots-do-not-show-in-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanpy plots do not show in Jupyter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#futurewarning-or-deprecationwarning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "FutureWarning" or "DeprecationWarning"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#r-and-rstudio-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R and RStudio Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="R and RStudio Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r-package-installation-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R package installation fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-in-libraryxyz-there-is-no-package-called-xyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Error in library(xyz): there is no package called 'xyz'"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rstudio-crashes-or-freezes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RStudio crashes or freezes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-and-github-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git and GitHub Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git and GitHub Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "git: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fatal-not-a-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "fatal: not a git repository"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-failed-to-push-some-refs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "error: failed to push some refs"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-download-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Download Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Download Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-is-very-slow-or-keeps-failing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download is very slow or keeps failing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-not-found-after-download" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "File not found" after download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cannot-access-a-dataset-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cannot access a dataset URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-and-memory-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance and Memory Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance and Memory Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memoryerror-or-killed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "MemoryError" or "Killed"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#everything-is-very-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Everything is very slow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Tips
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="General Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-an-error-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read an Error Message
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-nuclear-option-start-fresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Nuclear Option: Start Fresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-google-colab-as-a-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Google Colab as a Fallback
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conda-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "conda: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pip-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "pip: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-installation-hangs-or-is-very-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Package installation hangs or is very slow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-could-not-build-wheels-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ERROR: Could not build wheels for ..."
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conda-and-environment-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conda and Environment Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conda and Environment Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-instead-of-immunology-in-my-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "(base)" instead of "(immunology)" in my prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environmentnotwritableerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "EnvironmentNotWritableError"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packagesnotfounderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "PackagesNotFoundError"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-installed-a-package-but-python-cannot-find-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I installed a package but Python cannot find it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyter-notebook-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jupyter Notebook Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jupyter Notebook Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-does-not-open-in-my-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jupyter does not open in my browser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernel-not-found-or-wrong-python-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Kernel not found" or wrong Python version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notebook-is-not-saving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebook is not saving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-runs-forever-spinning-asterisk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell runs forever (spinning asterisk [*])
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Errors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulenotfounderror-no-module-named-xyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ModuleNotFoundError: No module named 'xyz'"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntaxerror-invalid-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "SyntaxError: invalid syntax"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indentationerror-unexpected-indent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "IndentationError: unexpected indent"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nameerror-name-xyz-is-not-defined" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "NameError: name 'xyz' is not defined"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typeerror-xyz-object-is-not-subscriptable-or-similar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "TypeError: 'xyz' object is not subscriptable" or similar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanpy-and-single-cell-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanpy and Single-Cell Errors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scanpy and Single-Cell Errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adatax-is-none-or-empty-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "adata.X is None" or empty results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valueerror-could-not-convert-string-to-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ValueError: could not convert string to float"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#umapclustering-looks-wrong-one-giant-blob-or-everything-scattered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UMAP/clustering looks wrong (one giant blob or everything scattered)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importerror-leidenalg-is-not-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "ImportError: leidenalg is not installed"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanpy-plots-do-not-show-in-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanpy plots do not show in Jupyter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#futurewarning-or-deprecationwarning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "FutureWarning" or "DeprecationWarning"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#r-and-rstudio-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R and RStudio Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="R and RStudio Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r-package-installation-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R package installation fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-in-libraryxyz-there-is-no-package-called-xyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Error in library(xyz): there is no package called 'xyz'"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rstudio-crashes-or-freezes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RStudio crashes or freezes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-and-github-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git and GitHub Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git and GitHub Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "git: command not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fatal-not-a-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "fatal: not a git repository"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-failed-to-push-some-refs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "error: failed to push some refs"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-download-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Download Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Download Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-is-very-slow-or-keeps-failing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download is very slow or keeps failing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-not-found-after-download" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "File not found" after download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cannot-access-a-dataset-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cannot access a dataset URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-and-memory-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance and Memory Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance and Memory Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memoryerror-or-killed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "MemoryError" or "Killed"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#everything-is-very-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Everything is very slow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Tips
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="General Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-an-error-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read an Error Message
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-nuclear-option-start-fresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Nuclear Option: Start Fresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-google-colab-as-a-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Google Colab as a Fallback
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="troubleshooting-guide">Troubleshooting Guide<a class="headerlink" href="#troubleshooting-guide" title="Permanent link">&para;</a></h1>
+<p>This guide covers the most common errors you will encounter during the bootcamp. Learning to troubleshoot on your own is one of the most valuable skills you will develop -- every programmer does this daily. Try these steps first, and if you are still stuck after working through them, you are always welcome to ask for help.</p>
+<ol>
+<li><strong>Read the error message carefully.</strong> The last few lines usually contain the actual problem.</li>
+<li><strong>Check this guide</strong> for your specific error.</li>
+<li><strong>Google the exact error message</strong> in quotes (e.g., <code>"ModuleNotFoundError: No module named 'scanpy'"</code>)</li>
+<li><strong>Ask an AI assistant</strong> (ChatGPT or Claude) -- paste your code and the full error message.</li>
+<li><strong>Search <a href="https://www.biostars.org/">Biostars</a> or <a href="https://stackoverflow.com/">Stack Overflow</a>.</strong></li>
+<li><strong>Still stuck?</strong> Reach out with your question -- just describe what you tried so we can pick up where you left off.</li>
+</ol>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#installation-problems">Installation Problems</a></li>
+<li><a href="#conda-and-environment-problems">Conda and Environment Problems</a></li>
+<li><a href="#jupyter-notebook-problems">Jupyter Notebook Problems</a></li>
+<li><a href="#python-errors">Python Errors</a></li>
+<li><a href="#scanpy-and-single-cell-errors">Scanpy and Single-Cell Errors</a></li>
+<li><a href="#r-and-rstudio-problems">R and RStudio Problems</a></li>
+<li><a href="#git-and-github-problems">Git and GitHub Problems</a></li>
+<li><a href="#data-download-problems">Data Download Problems</a></li>
+<li><a href="#performance-and-memory-problems">Performance and Memory Problems</a></li>
+<li><a href="#general-tips">General Tips</a></li>
+</ul>
+<hr />
+<h2 id="installation-problems">Installation Problems<a class="headerlink" href="#installation-problems" title="Permanent link">&para;</a></h2>
+<h3 id="conda-command-not-found">"conda: command not found"<a class="headerlink" href="#conda-command-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Miniconda was installed but your terminal does not know where to find it.</p>
+<p><strong>Fix:</strong>
+1. Close your terminal completely and open a new one
+2. If still broken, run:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Mac/Linux:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">source</span><span class="w"> </span>~/miniconda3/bin/activate
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>conda<span class="w"> </span>init<span class="w"> </span>bash<span class="w">   </span><span class="c1"># or: conda init zsh (if you use zsh)</span>
+</span></code></pre></div>
+3. Close and reopen the terminal again
+4. If still broken, reinstall Miniconda and make sure to type <code>yes</code> when asked "Do you wish to update your shell profile to automatically initialize conda?"</p>
+<h3 id="pip-command-not-found">"pip: command not found"<a class="headerlink" href="#pip-command-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> pip is not installed or your environment is not activated.</p>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># pip should now work</span>
+</span></code></pre></div></p>
+<h3 id="package-installation-hangs-or-is-very-slow">Package installation hangs or is very slow<a class="headerlink" href="#package-installation-hangs-or-is-very-slow" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Network issues or conda solving dependencies.</p>
+<p><strong>Fix:</strong>
+- Be patient -- some installations take 10-20 minutes
+- If it hangs for more than 30 minutes, press <code>Ctrl + C</code> to cancel and try:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>scanpy
+</span></code></pre></div>
+- Try a different network (e.g., switch from Wi-Fi to phone hotspot)</p>
+<h3 id="error-could-not-build-wheels-for">"ERROR: Could not build wheels for ..."<a class="headerlink" href="#error-could-not-build-wheels-for" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> A package needs to be compiled but your system is missing the required tools.</p>
+<p><strong>Fix (Mac):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>xcode-select<span class="w"> </span>--install
+</span></code></pre></div></p>
+<p><strong>Fix (Windows):</strong>
+- Install <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual Studio Build Tools</a>
+- Select "C++ build tools" during installation</p>
+<p><strong>Fix (Linux):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
+</span></code></pre></div></p>
+<hr />
+<h2 id="conda-and-environment-problems">Conda and Environment Problems<a class="headerlink" href="#conda-and-environment-problems" title="Permanent link">&para;</a></h2>
+<h3 id="base-instead-of-immunology-in-my-prompt">"(base)" instead of "(immunology)" in my prompt<a class="headerlink" href="#base-instead-of-immunology-in-my-prompt" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> You forgot to activate the immunology environment.</p>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span></code></pre></div>
+Do this every time you open a new terminal.</p>
+<h3 id="environmentnotwritableerror">"EnvironmentNotWritableError"<a class="headerlink" href="#environmentnotwritableerror" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Permission issue with the conda directory.</p>
+<p><strong>Fix (Mac/Linux):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span>~/miniconda3
+</span></code></pre></div></p>
+<h3 id="packagesnotfounderror">"PackagesNotFoundError"<a class="headerlink" href="#packagesnotfounderror" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The package is not available in the current conda channel.</p>
+<p><strong>Fix:</strong> Use pip instead:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip<span class="w"> </span>install<span class="w"> </span>package_name
+</span></code></pre></div></p>
+<h3 id="i-installed-a-package-but-python-cannot-find-it">I installed a package but Python cannot find it<a class="headerlink" href="#i-installed-a-package-but-python-cannot-find-it" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> You installed it in the wrong environment.</p>
+<p><strong>Fix:</strong>
+1. Check which environment you are in: look at the prompt (should say <code>(immunology)</code>)
+2. Activate the right environment: <code>conda activate immunology</code>
+3. Reinstall: <code>pip install package_name</code>
+4. Verify: <code>python -c "import package_name"</code></p>
+<hr />
+<h2 id="jupyter-notebook-problems">Jupyter Notebook Problems<a class="headerlink" href="#jupyter-notebook-problems" title="Permanent link">&para;</a></h2>
+<h3 id="jupyter-does-not-open-in-my-browser">Jupyter does not open in my browser<a class="headerlink" href="#jupyter-does-not-open-in-my-browser" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The browser did not launch automatically.</p>
+<p><strong>Fix:</strong> Copy one of the URLs from the terminal output (looks like <code>http://localhost:8888/?token=...</code>) and paste it into your browser.</p>
+<h3 id="kernel-not-found-or-wrong-python-version">"Kernel not found" or wrong Python version<a class="headerlink" href="#kernel-not-found-or-wrong-python-version" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Jupyter is using a different Python than your conda environment.</p>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>pip<span class="w"> </span>install<span class="w"> </span>ipykernel
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>immunology<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (immunology)&quot;</span>
+</span></code></pre></div>
+Then in Jupyter, go to Kernel -&gt; Change kernel -&gt; Python (immunology).</p>
+<h3 id="notebook-is-not-saving">Notebook is not saving<a class="headerlink" href="#notebook-is-not-saving" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Disk space or permissions issue.</p>
+<p><strong>Fix:</strong>
+- Check disk space: <code>df -h</code> (Mac/Linux)
+- Make sure you are saving to a folder you own (e.g., ~/bootcamp, not a system folder)
+- Try File -&gt; Save As and save to a new location</p>
+<h3 id="cell-runs-forever-spinning-asterisk">Cell runs forever (spinning asterisk [*])<a class="headerlink" href="#cell-runs-forever-spinning-asterisk" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The code is taking a long time or is stuck in an infinite loop.</p>
+<p><strong>Fix:</strong>
+- Wait a few minutes (some operations are genuinely slow)
+- If it seems stuck, go to Kernel -&gt; Interrupt (or press <code>I I</code> -- the letter I twice)
+- If that does not work, go to Kernel -&gt; Restart (you will lose all variables and need to re-run previous cells)</p>
+<hr />
+<h2 id="python-errors">Python Errors<a class="headerlink" href="#python-errors" title="Permanent link">&para;</a></h2>
+<h3 id="modulenotfounderror-no-module-named-xyz">"ModuleNotFoundError: No module named 'xyz'"<a class="headerlink" href="#modulenotfounderror-no-module-named-xyz" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The package is not installed in your current environment.</p>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>pip<span class="w"> </span>install<span class="w"> </span>xyz
+</span></code></pre></div>
+Then restart your Jupyter kernel (Kernel -&gt; Restart) and re-run the import cell.</p>
+<h3 id="syntaxerror-invalid-syntax">"SyntaxError: invalid syntax"<a class="headerlink" href="#syntaxerror-invalid-syntax" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> A typo in your code.</p>
+<p><strong>Common causes:</strong>
+- Missing colon at the end of <code>if</code>, <code>for</code>, <code>def</code>, <code>class</code> statements
+- Mismatched parentheses or brackets
+- Using a Python 2 syntax in Python 3
+- Copying code that has invisible special characters (retype it manually)</p>
+<h3 id="indentationerror-unexpected-indent">"IndentationError: unexpected indent"<a class="headerlink" href="#indentationerror-unexpected-indent" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Inconsistent use of spaces and tabs.</p>
+<p><strong>Fix:</strong> Make sure all indentation uses the same number of spaces (4 is standard). In Jupyter, select the problematic lines and press Tab to indent or Shift+Tab to unindent.</p>
+<h3 id="nameerror-name-xyz-is-not-defined">"NameError: name 'xyz' is not defined"<a class="headerlink" href="#nameerror-name-xyz-is-not-defined" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> You are trying to use a variable or function that has not been created yet.</p>
+<p><strong>Fix:</strong>
+- Did you run all the cells above? (In Jupyter, run cells in order from top to bottom)
+- Did you restart the kernel? (If so, re-run all cells from the beginning)
+- Check for typos in the variable name</p>
+<h3 id="typeerror-xyz-object-is-not-subscriptable-or-similar">"TypeError: 'xyz' object is not subscriptable" or similar<a class="headerlink" href="#typeerror-xyz-object-is-not-subscriptable-or-similar" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> You are trying to use an object in a way it does not support.</p>
+<p><strong>Fix:</strong> Check the type of your variable with <code>type(variable_name)</code> and make sure you are using the correct syntax for that type.</p>
+<hr />
+<h2 id="scanpy-and-single-cell-errors">Scanpy and Single-Cell Errors<a class="headerlink" href="#scanpy-and-single-cell-errors" title="Permanent link">&para;</a></h2>
+<h3 id="adatax-is-none-or-empty-results">"adata.X is None" or empty results<a class="headerlink" href="#adatax-is-none-or-empty-results" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The data was not loaded correctly, or a previous filtering step removed all cells/genes.</p>
+<p><strong>Fix:</strong>
+- Reload the data from scratch
+- Check <code>adata.shape</code> after each step to make sure you still have cells and genes</p>
+<h3 id="valueerror-could-not-convert-string-to-float">"ValueError: could not convert string to float"<a class="headerlink" href="#valueerror-could-not-convert-string-to-float" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The data matrix contains non-numeric values, often because gene names ended up in the matrix.</p>
+<p><strong>Fix:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># When loading, make sure gene names go to var_names</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_10x_mtx</span><span class="p">(</span><span class="s2">&quot;path/&quot;</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="s2">&quot;gene_symbols&quot;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div></p>
+<h3 id="umapclustering-looks-wrong-one-giant-blob-or-everything-scattered">UMAP/clustering looks wrong (one giant blob or everything scattered)<a class="headerlink" href="#umapclustering-looks-wrong-one-giant-blob-or-everything-scattered" title="Permanent link">&para;</a></h3>
+<p><strong>Possible causes and fixes:</strong>
+1. <strong>Forgot to normalize:</strong> Make sure you ran <code>sc.pp.normalize_total</code> and <code>sc.pp.log1p</code>
+2. <strong>Forgot to select HVGs:</strong> Make sure you selected highly variable genes before PCA
+3. <strong>Resolution too low/high:</strong> Try different resolution values in <code>sc.tl.leiden(adata, resolution=0.5)</code>
+4. <strong>Too few/many PCs:</strong> Try <code>n_pcs=30</code> or <code>n_pcs=40</code> in <code>sc.pp.neighbors</code>
+5. <strong>Batch effects:</strong> If mixing datasets, you may need batch correction</p>
+<h3 id="importerror-leidenalg-is-not-installed">"ImportError: leidenalg is not installed"<a class="headerlink" href="#importerror-leidenalg-is-not-installed" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>pip<span class="w"> </span>install<span class="w"> </span>leidenalg
+</span></code></pre></div></p>
+<h3 id="scanpy-plots-do-not-show-in-jupyter">Scanpy plots do not show in Jupyter<a class="headerlink" href="#scanpy-plots-do-not-show-in-jupyter" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong> Add this at the top of your notebook:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</span></code></pre></div>
+Or update matplotlib:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>matplotlib
+</span></code></pre></div></p>
+<h3 id="futurewarning-or-deprecationwarning">"FutureWarning" or "DeprecationWarning"<a class="headerlink" href="#futurewarning-or-deprecationwarning" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> You are using a function that will change in a future version.</p>
+<p><strong>Fix:</strong> These are warnings, not errors. Your code still works. You can ignore them or suppress them:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</span></code></pre></div></p>
+<hr />
+<h2 id="r-and-rstudio-problems">R and RStudio Problems<a class="headerlink" href="#r-and-rstudio-problems" title="Permanent link">&para;</a></h2>
+<h3 id="r-package-installation-fails">R package installation fails<a class="headerlink" href="#r-package-installation-fails" title="Permanent link">&para;</a></h3>
+<p><strong>Common fix:</strong>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Try installing from binary instead of source</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;Seurat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binary&quot;</span><span class="p">)</span>
+</span></code></pre></div></p>
+<p>If asked "Do you want to install from sources the package which needs compilation?", type <code>no</code>.</p>
+<h3 id="error-in-libraryxyz-there-is-no-package-called-xyz">"Error in library(xyz): there is no package called 'xyz'"<a class="headerlink" href="#error-in-libraryxyz-there-is-no-package-called-xyz" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong> Install the package:
+<div class="language-r highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;xyz&quot;</span><span class="p">)</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># or for Bioconductor packages:</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;xyz&quot;</span><span class="p">)</span>
+</span></code></pre></div></p>
+<h3 id="rstudio-crashes-or-freezes">RStudio crashes or freezes<a class="headerlink" href="#rstudio-crashes-or-freezes" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+- Close RStudio
+- Delete the session file: <code>rm ~/.local/share/rstudio/sessions/active/*/session-persistent-state</code> (Mac/Linux)
+- Reopen RStudio</p>
+<hr />
+<h2 id="git-and-github-problems">Git and GitHub Problems<a class="headerlink" href="#git-and-github-problems" title="Permanent link">&para;</a></h2>
+<h3 id="git-command-not-found">"git: command not found"<a class="headerlink" href="#git-command-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Fix (Mac):</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>xcode-select<span class="w"> </span>--install
+</span></code></pre></div></p>
+<p><strong>Fix (Windows):</strong> Download and install from https://git-scm.com/download/win</p>
+<h3 id="fatal-not-a-git-repository">"fatal: not a git repository"<a class="headerlink" href="#fatal-not-a-git-repository" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> You are not in a folder that has been initialized with git.</p>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">cd</span><span class="w"> </span>~/bootcamp<span class="w">  </span><span class="c1"># or wherever your project is</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>git<span class="w"> </span>init<span class="w">       </span><span class="c1"># only if this is a new project</span>
+</span></code></pre></div></p>
+<h3 id="error-failed-to-push-some-refs">"error: failed to push some refs"<a class="headerlink" href="#error-failed-to-push-some-refs" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> The remote repository has changes you don't have locally.</p>
+<p><strong>Fix:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1"># Then try pushing again</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</span></code></pre></div></p>
+<hr />
+<h2 id="data-download-problems">Data Download Problems<a class="headerlink" href="#data-download-problems" title="Permanent link">&para;</a></h2>
+<h3 id="download-is-very-slow-or-keeps-failing">Download is very slow or keeps failing<a class="headerlink" href="#download-is-very-slow-or-keeps-failing" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+- Try a different network connection
+- Use <code>wget</code> with resume capability:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>wget<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;URL&quot;</span><span class="w">  </span><span class="c1"># -c allows resuming interrupted downloads</span>
+</span></code></pre></div>
+- For large files, try downloading during off-peak hours</p>
+<h3 id="file-not-found-after-download">"File not found" after download<a class="headerlink" href="#file-not-found-after-download" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+- Check where the file was downloaded: <code>ls ~/Downloads/</code>
+- Move it to the right place: <code>mv ~/Downloads/filename data/raw/</code>
+- Make sure you are using the correct file path in your code</p>
+<h3 id="cannot-access-a-dataset-url">Cannot access a dataset URL<a class="headerlink" href="#cannot-access-a-dataset-url" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+- Some datasets require registration (e.g., 10x Genomics). Create a free account.
+- Try a different dataset or use the built-in Scanpy datasets (e.g., <code>sc.datasets.pbmc3k()</code>)
+- Check if the URL has changed by searching for the dataset name</p>
+<hr />
+<h2 id="performance-and-memory-problems">Performance and Memory Problems<a class="headerlink" href="#performance-and-memory-problems" title="Permanent link">&para;</a></h2>
+<h3 id="memoryerror-or-killed">"MemoryError" or "Killed"<a class="headerlink" href="#memoryerror-or-killed" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong> Your computer ran out of RAM.</p>
+<p><strong>Fix:</strong>
+- Close other applications (especially web browsers with many tabs)
+- Work with a smaller dataset: <code>adata = adata[:5000, :].copy()</code> (use only 5000 cells)
+- Use sparse matrix operations (Scanpy does this by default)
+- If the problem persists, use Google Colab (free, gives you more RAM):
+  1. Go to https://colab.research.google.com
+  2. Upload your notebook
+  3. Install packages with <code>!pip install scanpy</code></p>
+<h3 id="everything-is-very-slow">Everything is very slow<a class="headerlink" href="#everything-is-very-slow" title="Permanent link">&para;</a></h3>
+<p><strong>Fix:</strong>
+- Check available memory: <code>python -c "import psutil; print(f'{psutil.virtual_memory().available / 1e9:.1f} GB free')"</code> (install psutil first: <code>pip install psutil</code>)
+- Close other applications
+- Use fewer cells or genes for testing, then scale up
+- Some operations (like scVI training) benefit from a GPU -- consider Google Colab with GPU runtime</p>
+<hr />
+<h2 id="general-tips">General Tips<a class="headerlink" href="#general-tips" title="Permanent link">&para;</a></h2>
+<h3 id="how-to-read-an-error-message">How to Read an Error Message<a class="headerlink" href="#how-to-read-an-error-message" title="Permanent link">&para;</a></h3>
+<p>Error messages in Python are called "tracebacks." Read them from <strong>bottom to top</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Traceback (most recent call last):
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>  File &quot;notebook.py&quot;, line 15, in &lt;module&gt;     &lt;-- where the error happened
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    adata = sc.read_10x_mtx(&quot;wrong_path/&quot;)     &lt;-- the line of code
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>FileNotFoundError: [Errno 2] No such file       &lt;-- THE ACTUAL ERROR
+</span></code></pre></div>
+<p>The last line is the most important. It tells you what went wrong.</p>
+<h3 id="the-nuclear-option-start-fresh">The Nuclear Option: Start Fresh<a class="headerlink" href="#the-nuclear-option-start-fresh" title="Permanent link">&para;</a></h3>
+<p>If everything is broken and you cannot figure out why:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Remove your conda environment</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>conda<span class="w"> </span>deactivate
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>conda<span class="w"> </span>env<span class="w"> </span>remove<span class="w"> </span>-n<span class="w"> </span>immunology
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1"># Recreate it</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>immunology<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11<span class="w"> </span>-y
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>conda<span class="w"> </span>activate<span class="w"> </span>immunology
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>pip<span class="w"> </span>install<span class="w"> </span>scanpy<span class="w"> </span>scirpy<span class="w"> </span>scvi-tools<span class="w"> </span>celltypist<span class="w"> </span>leidenalg
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>matplotlib<span class="w"> </span>seaborn<span class="w"> </span>scikit-learn<span class="w"> </span>jupyter
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>pip<span class="w"> </span>install<span class="w"> </span>anndata<span class="w"> </span>mudata<span class="w"> </span>session-info
+</span></code></pre></div>
+<p>This takes 10-15 minutes but gives you a clean slate.</p>
+<h3 id="using-google-colab-as-a-fallback">Using Google Colab as a Fallback<a class="headerlink" href="#using-google-colab-as-a-fallback" title="Permanent link">&para;</a></h3>
+<p>If your computer is too slow or you cannot get packages to install, use Google Colab:</p>
+<ol>
+<li>Go to https://colab.research.google.com</li>
+<li>Click "New notebook"</li>
+<li>In the first cell, install your packages:
+   <div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">scanpy</span> <span class="n">scirpy</span> <span class="n">scvi</span><span class="o">-</span><span class="n">tools</span> <span class="n">celltypist</span>
+</span></code></pre></div></li>
+<li>Work through the tutorials just like in Jupyter</li>
+<li>Your notebooks are saved to Google Drive</li>
+</ol>
+<p>Colab is free and gives you a more powerful computer in the cloud. The downside is that your session resets after a few hours of inactivity, so save your work frequently.</p>
+<hr />
+<p><em>Still stuck after trying the steps above? That is completely normal and happens to every programmer. Take a break, come back with fresh eyes, and try again -- the solution is almost always simpler than you think. And if you have genuinely exhausted these options, don't hesitate to reach out. Just let us know what you tried so we can help you efficiently.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../GLOSSARY/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Glossary">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Glossary
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/princello" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
