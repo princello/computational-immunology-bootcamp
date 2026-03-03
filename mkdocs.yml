@@ -1,0 +1,78 @@
+site_name: Computational Immunology Bootcamp
+site_description: A self-guided introduction to computational modeling in translational immunology
+site_author: Zicheng Wang
+site_url: ""
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: README.md
+  - Week 0 - Setup: week_0_setup/README.md
+  - Week 1 - Immunology Foundations: week_1_immunology_foundations/README.md
+  - Week 2 - Single-Cell RNA-seq: week_2_single_cell_pipeline/README.md
+  - Week 3 - TCR & BCR Analysis: week_3_tcr_bcr_analysis/README.md
+  - Week 4 - Multi-omics: week_4_multi_omics/README.md
+  - Final Practice: final_practice/README.md
+  - Resources:
+      - Glossary: GLOSSARY.md
+      - Troubleshooting: TROUBLESHOOTING.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/princello
